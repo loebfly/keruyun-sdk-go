@@ -38,4 +38,12 @@ type Api interface {
 	CrmQueryProperty(req CrmQueryPropertyReq) kry_model.Result[CrmCustomerPropertyResp]
 	// CrmDirectCharge 储值充值接口
 	CrmDirectCharge(req CrmDirectChargeReq) kry_model.Result[CrmDirectChargeResp]
+
+	/*
+		订单相关
+	*/
+	// OrderQueryDetail 订单详情查询接口
+	OrderQueryDetail(req OrderQueryDetailReq) kry_model.Result[OrderDetailResp]
+	// OrderQueryList 订单列表查询接口
+	OrderQueryList(req OrderQueryListReq) kry_model.Result[OrderListResp]
 }

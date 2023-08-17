@@ -286,3 +286,150 @@ type CrmDirectChargeResp struct {
 	ServerCode int    `json:"serverCode"` // 服务编码
 	MessageId  string `json:"messageId"`  // 服务消息ID
 }
+
+type OrderDetailResp struct {
+	Success  bool   `json:"success"`  // 是否成功,true:成功，false:失败
+	MsgCode  string `json:"msgCode"`  // success为false时的异常码
+	MsgInfo  string `json:"msgInfo"`  // success为false时的异常信息
+	CanRetry bool   `json:"canRetry"` // 可以重试
+	Data     struct {
+		OrderBaseVO struct {
+			ShopId             string      `json:"shopId"`             // 门店ID
+			ShopName           string      `json:"shopName"`           // 门店名称
+			BrandId            string      `json:"brandId"`            // 品牌ID
+			BrandName          string      `json:"brandName"`          // 品牌名称
+			OrderId            string      `json:"orderId"`            // 订单ID
+			BusiOrderNo        string      `json:"busiOrderNo"`        // 业务订单号
+			ThirdOrderNo       string      `json:"thirdOrderNo"`       // 三方订单号
+			OpenTime           string      `json:"openTime"`           // 下单时间
+			SettleTime         string      `json:"settleTime"`         // 结账时间
+			FinishBusiDate     string      `json:"finishBusiDate"`     // 营业日
+			OrderSource        string      `json:"orderSource"`        // 订单来源
+			OrderType          string      `json:"orderType"`          // 订单类型
+			OrderStatus        string      `json:"orderStatus"`        // 订单状态
+			OrderAmt           interface{} `json:"orderAmt"`           // 订单金额
+			PromoAmt           string      `json:"promoAmt"`           // 优惠金额
+			OrderReceivedAmt   string      `json:"orderReceivedAmt"`   // 订单收入
+			OpenOperatorName   string      `json:"openOperatorName"`   // 开单人
+			SettleOperatorName string      `json:"settleOperatorName"` // 结账人
+			MemberId           string      `json:"memberId"`           // 会员ID
+			MemberPhone        string      `json:"memberPhone"`        // 会员手机号
+			MemberName         string      `json:"memberName"`         // 会员姓名
+			OrderPeopleCnt     string      `json:"orderPeopleCnt"`     // 就餐人数
+			SerialNo           string      `json:"serialNo"`           // 流水号
+			Subject            string      `json:"subject"`            // 整单备注
+			RelatedOrderId     string      `json:"relatedOrderId"`     // 关联订单ID，如整单退或反结时的原单订单ID
+			ThirdSerialNo      string      `json:"thirdSerialNo"`      // 第三方订单流水号
+		} `json:"orderBaseVO"` // 主单信息
+		OrderTableVoList []struct {
+			TableName string `json:"tableName"` // 桌台名称
+			TableId   string `json:"tableId"`   // 桌台ID
+		} `json:"orderTableVoList"` // 桌台信息
+		OrderItemVoList []struct {
+			ItemType           string `json:"itemType"`           // 商品类型
+			GiftFlag           bool   `json:"giftFlag"`           // 是否赠送
+			WeighFlag          bool   `json:"weighFlag"`          // 是否是称重商品
+			TempFlag           bool   `json:"tempFlag"`           // 是否是临时菜
+			PromoFlag          bool   `json:"promoFlag"`          // 是否是优惠菜
+			BigTypeName        string `json:"bigTypeName"`        // 商品大类名称
+			MidTypeName        string `json:"midTypeName"`        // 商品中类名称
+			ItemCode           string `json:"itemCode"`           // 商品编码
+			ItemName           string `json:"itemName"`           // 商品名称
+			SaleStatusType     string `json:"saleStatusType"`     // 商品售卖状态类型
+			SaleStatusTypeCode string `json:"saleStatusTypeCode"` // 商品售卖状态类型编码
+			Id                 string `json:"id"`                 // 商品id
+			ParentId           string `json:"parentId"`           // 父商品id
+			ProductionDeptId   string `json:"productionDeptId"`   // 出品部门ID
+			UnitName           string `json:"unitName"`           // 单位名称
+			SpecName           string `json:"specName"`           // 规格
+			SpecNameConcat     string `json:"specNameConcat"`     // 规格名称全称
+			ItemPrice          string `json:"itemPrice"`          // 商品原始单价
+			SalePrice          string `json:"salePrice"`          // 商品售价
+			PracticeVoList     []struct {
+				PracticeName string `json:"practiceName"` // 做法名称
+				PracticeAmt  int    `json:"practiceAmt"`  // 做法金额
+			} `json:"practiceVoList"` // 做法
+			ItemSubject           string         `json:"itemSubject"`           // 商品备注
+			Quantity              string         `json:"quantity"`              // 销售数量、退菜数量或赠菜数量 1. 是否是赠菜通过giftFlag判断 2. 是否是退菜通过saleStatusTypeCode判断，DISCARD表示退菜，NORMAL表示销售
+			ItemSaleAmt           string         `json:"itemSaleAmt"`           // 商品销售金额
+			ExtraFeeApportionAmt  string         `json:"extraFeeApportionAmt"`  // 服务费分摊金额
+			ItemPromoApportionAmt string         `json:"itemPromoApportionAmt"` // 商品优惠分摊
+			ItemReceivedAmt       string         `json:"itemReceivedAmt"`       // 商品收入
+			Children              map[string]any `json:"children"`              // 子节点
+		} `json:"orderItemVoList"` // 菜品明细
+		OpenOrderPromoVoList []struct {
+			PromoName    string `json:"promoName"`    // 优惠名称
+			PromoType    string `json:"promoType"`    // 优惠类型
+			PromoTime    string `json:"promoTime"`    // 优惠时间
+			OperatorName string `json:"operatorName"` // 操作人姓名
+			PromoAmt     int    `json:"promoAmt"`     // 优惠金额
+		} `json:"openOrderPromoVoList"` // 订单优惠信息
+		OpenExtraFeeVoList []struct {
+			ExtraFeeName              string `json:"extraFeeName"`              // 服务费名称
+			ExtraFeeType              string `json:"extraFeeType"`              // 服务费类型
+			ExtraFeeAmt               int    `json:"extraFeeAmt"`               // 服务费金额
+			ExtraFeePromoApportionAmt int    `json:"extraFeePromoApportionAmt"` // 服务费优惠分摊金额
+			ExtraFeeReceivedAmt       int    `json:"extraFeeReceivedAmt"`       // 服务费收入
+			ApportionedAmt            int    `json:"apportionedAmt"`            // 被分摊金额
+			PromoTotalAmt             int    `json:"promoTotalAmt"`             // 服务费优惠总金额
+		} `json:"openExtraFeeVoList"` // 服务费信息
+		OpenPaymentDetailVoList []struct {
+			PayDetailNo         string `json:"payDetailNo"`         // 支付单号
+			FaceAmt             string `json:"faceAmt"`             // 面额
+			PayAmt              string `json:"payAmt"`              // 支付金额
+			ShopPromoAmt        string `json:"shopPromoAmt"`        // 商户优惠金额
+			PlatformServiceAmt  string `json:"platformServiceAmt"`  // 平台抽佣/服务费
+			ActualReceiveAmt    string `json:"actualReceiveAmt"`    // 商户实收
+			PayMethodName       string `json:"payMethodName"`       // 支付方式名称
+			PayDetailStatus     string `json:"payDetailStatus"`     // 支付状态
+			PayDetailStartTime  string `json:"payDetailStartTime"`  // 创建时间/支出开始时间
+			PayDetailEndTime    string `json:"payDetailEndTime"`    // 支付/退款完成时间
+			PayPromoAmt         string `json:"payPromoAmt"`         // 支付优惠
+			CouponCnt           string `json:"couponCnt"`           // 券数量
+			CouponName          string `json:"couponName"`          // 券名称
+			OperatorName        string `json:"operatorName"`        // 操作人姓名/收银员
+			ActualPayAmt        string `json:"actualPayAmt"`        // 实际支付金额
+			PlatformPromoAmt    string `json:"platformPromoAmt"`    // 平台优惠金额
+			PayMethodId         int    `json:"payMethodId"`         // 支付方式ID，-3:现金，-4:银行卡，-129:扫码支付，-130:收银码，-5:微信，-6:支付宝，-37:云闪付，-1:会员卡，-15:实体卡，-20:匿名卡，-127:储值补录，-128:挂账，-24:美团团购券，-36:口碑团购券，0:抵用券
+			CouponReconcileFlag bool   `json:"couponReconcileFlag"` // 团购券是否已对账 true:已对账 false:未对账
+		} `json:"openPaymentDetailVoList"` // 支付信息
+	} `json:"data"` // 数据
+	ExtInfo struct {
+		TraceId                string `json:"traceId"`                // 跟踪标识
+		ServerCurrentTimestamp string `json:"serverCurrentTimestamp"` // 服务器当前时间戳
+		ServerCurrentTime      string `json:"serverCurrentTime"`      // 服务器当前时间
+	} `json:"extInfo"` // 附加信息
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type OrderListResp struct {
+	Success    bool `json:"success"`    // 是否成功,true:成功,false:失败
+	ServerCode int  `json:"serverCode"` // 服务编码
+	Data       struct {
+		TotalCount string `json:"totalCount"` // 总数
+		PageNo     string `json:"pageNo"`     // 页号
+		PageSize   string `json:"pageSize"`   // 页大小
+		TotalPage  string `json:"totalPage"`  // 总页数
+		List       []struct {
+			BrandId          string `json:"brandId"`          // 品牌ID
+			ShopId           string `json:"shopId"`           // 门店ID
+			OrderId          string `json:"orderId"`          // 订单ID
+			BusiOrderNo      string `json:"busiOrderNo"`      // 业务订单号
+			OrderStatus      string `json:"orderStatus"`      // 订单状态{1:待处理(WAIT_PROCESSED) 2:已接单(ORDER_RECEIVED) 3:已完成(SUCCESS) 4:待结账(WAIT_SETTLED) 5:已结账(SETTLED) 6:已退单(REFUND) 7:已关闭(CLOSED) 8:已作废(INVALID) 9:已取消(CANCELLED) 10:已拒绝(REJECTED) 11:已反结账(ANTI_SETTLED)}
+			OrderType        string `json:"orderType"`        // 订单类型{1:堂食(FOR_HERE) 2:平台外卖(PLATFORM_TAKE_OUT) 3:自营外卖(SELF_TAKE_OUT) 4:自提(SELF_TAKE) 5:无单收银(NO_ORDER_CASHIER) 6:会员充值(MEMBER_STORE) 7:会员补录(MEMBER_MANUAL_STORE) 8:销账订单(REPAYMENT_ORDER)}
+			OrderAmt         string `json:"orderAmt"`         // 订单金额(单位/分)
+			PromoAmt         string `json:"promoAmt"`         // 优惠金额(单位/分)
+			OrderReceivedAmt string `json:"orderReceivedAmt"` // 订单收入/订单实收(单位/分)
+			OpenTime         string `json:"openTime"`         // 下单时间
+			FinishTime       string `json:"finishTime"`       // 完结时间
+			ThirdOrderNo     string `json:"thirdOrderNo"`     // 第三方订单号
+			SerialNo         string `json:"serialNo"`         // 订单流水号
+			ThirdSerialNo    string `json:"thirdSerialNo"`    // 第三方流水号
+		} `json:"list"` // 列表
+		PrevPage     string `json:"prevPage"`     // 上一页
+		NextPage     string `json:"nextPage"`     // 下一页
+		EmptyForList bool   `json:"emptyForList"` // 当前list是否为null
+	} `json:"data"` // 	数据
+	MessageId string `json:"messageId"` // 服务消息ID
+}

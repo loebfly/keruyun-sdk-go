@@ -61,3 +61,19 @@ type CrmDirectChargeReq struct {
 	BizId            string `json:"bizId"`            // 充值业务id，订单号（不含特殊字符，长度不超过64位）
 	OperatorId       string `json:"operatorId"`       // 操作人id（数字字符串，长度不超过64位）
 }
+
+type OrderQueryDetailReq struct {
+	OrderId string `json:"orderId"` // 	订单ID
+}
+
+type OrderQueryListReq struct {
+	DateType        string   `json:"dateType"`        // 查询时间类型{1:营业日期(FINISH_BUSI_DATE) 2:下单时间(OPEN_TIME) 3:完结时间(FINISH_TIME) 4:结账时间(SETTLE_TIME)}
+	StartDate       string   `json:"startDate"`       // 查询开始时间（限制查询时间范围不超过31天） 若查询时间类型为营业日期，则精确到天，示例：2021-06-02 其它查询时间类型精确到秒，示例：2021-06-02 04:30:00
+	EndDate         string   `json:"endDate"`         // 查询结束时间（限制查询时间范围不超过31天） 若查询时间类型为营业日期，则精确到天，示例：2021-06-02 其它查询时间类型精确到秒，示例：2021-06-02 04:30:00
+	OrderTypeList   []string `json:"orderTypeList"`   // 订单类型{1:堂食(FOR_HERE) 2:平台外卖(PLATFORM_TAKE_OUT) 3:自营外卖(SELF_TAKE_OUT)4:会员充值(MEMBER_STORE) 5:无单收银(NO_ORDER_CASHIER)6:销账订单(REPAYMENT_ORDER)}
+	OrderStatusList []string `json:"orderStatusList"` // 订单状态{1:待处理(WAIT_PROCESSED) 2:待结账(WAIT_SETTLED) 3:已结账(SETTLED) 4:已退单(REFUND)5:已作废(INVALID)6:已取消(CANCELLED) 7:已拒绝(REJECTED) 8:已完成(SUCCESS)}
+	PageBean        struct {
+		PageNum  int `json:"pageNum"`  // 页码
+		PageSize int `json:"pageSize"` // 页大小
+	} `json:"pageBean"` // 分页
+}
