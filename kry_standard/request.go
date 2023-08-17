@@ -97,10 +97,20 @@ type StockLossOutQueryDetailReq struct {
 	Ids  []string `json:"ids"`  // 单据id列表
 }
 
-type StockOtherInQueryDetailReq struct {
+type StockOtherInOutQueryDetailReq struct {
 	Ids []string `json:"ids"` // 单据id列表
 }
 
-type StockOtherOutQueryDetailReq struct {
-	Ids []string `json:"ids"`
+type StockTransferInternalQueryListReq struct {
+	StartDate       string `json:"startDate"`       // 业务日期-开始（不能与更新时间同时为空）
+	EndDate         string `json:"endDate"`         // 业务日期-结束
+	UpdateTimeStart string `json:"updateTimeStart"` // 更新时间-开始（不能与业务日期同时为空）
+	UpdateTimeEnd   string `json:"updateTimeEnd"`   // 更新时间-结束
+	StoreId         string `json:"storeId"`         // 机构id
+	OutDepotId      string `json:"outDepotId"`      // 出库仓库id
+	InDepotId       string `json:"inDepotId"`       // 入库仓库id
+	Status          int    `json:"status"`          // 状态961：暂存，963：提交，962：已审核，964：已驳回，965：已反审，966：已作废
+	OrgType         int    `json:"orgType"`         // 机构类型 1：门店 2：公司
+	PageNum         int    `json:"pageNum"`         // 页码(默认1)
+	PageSize        int    `json:"pageSize"`        // 页大小（默认20，最大为100）
 }

@@ -14,7 +14,7 @@ func (s standardApi) StockLossOutQueryDetail(req kry_standard.StockLossOutQueryD
 	return network.JsonToResult[kry_standard.StockInOutDetailResp](s.newPostJsonOptions(UriStockLossOutQueryDetail, req))
 }
 
-func (s standardApi) StockOtherInQueryDetail(req kry_standard.StockOtherInQueryDetailReq) kry_model.Result[kry_standard.StockInOutDetailResp] {
+func (s standardApi) StockOtherInQueryDetail(req kry_standard.StockOtherInOutQueryDetailReq) kry_model.Result[kry_standard.StockInOutDetailResp] {
 	return network.JsonToResult[kry_standard.StockInOutDetailResp](s.newPostJsonOptions(UriStockOtherInQueryDetail, req))
 }
 
@@ -26,6 +26,10 @@ func (s standardApi) StockOtherOutQueryList(req kry_standard.StockInOutQueryList
 	return network.JsonToResult[kry_standard.StockInOutListResp](s.newPostJsonOptions(UriStockOtherOutQueryList, req))
 }
 
-func (s standardApi) StockOtherOutQueryDetail(req kry_standard.StockOtherOutQueryDetailReq) kry_model.Result[kry_standard.StockInOutDetailResp] {
+func (s standardApi) StockOtherOutQueryDetail(req kry_standard.StockOtherInOutQueryDetailReq) kry_model.Result[kry_standard.StockInOutDetailResp] {
 	return network.JsonToResult[kry_standard.StockInOutDetailResp](s.newPostJsonOptions(UriStockOtherOutQueryDetail, req))
+}
+
+func (s standardApi) StockTransferInternalQueryList(req kry_standard.StockTransferInternalQueryListReq) kry_model.Result[kry_standard.StockTransferInternalListResp] {
+	return network.JsonToResult[kry_standard.StockTransferInternalListResp](s.newPostJsonOptions(UriStockTransferInternalQueryList, req))
 }

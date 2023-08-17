@@ -55,11 +55,13 @@ type Api interface {
 	// StockLossOutQueryDetail 报损出库单详情
 	StockLossOutQueryDetail(req StockLossOutQueryDetailReq) kry_model.Result[StockInOutDetailResp]
 	// StockOtherInQueryDetail 其他入库单详情
-	StockOtherInQueryDetail(req StockOtherInQueryDetailReq) kry_model.Result[StockInOutDetailResp]
+	StockOtherInQueryDetail(req StockOtherInOutQueryDetailReq) kry_model.Result[StockInOutDetailResp]
 	// StockOtherInQueryList 其他入库单列表查询
 	StockOtherInQueryList(req StockInOutQueryListReq) kry_model.Result[StockInOutListResp]
 	// StockOtherOutQueryList 其他出库单列表查询
 	StockOtherOutQueryList(req StockInOutQueryListReq) kry_model.Result[StockInOutListResp]
 	// StockOtherOutQueryDetail 其他出库单详情
-	StockOtherOutQueryDetail(req StockOtherOutQueryDetailReq) kry_model.Result[StockInOutDetailResp]
+	StockOtherOutQueryDetail(req StockOtherInOutQueryDetailReq) kry_model.Result[StockInOutDetailResp]
+	// StockTransferInternalQueryList 组织内调拨订单列表查询
+	StockTransferInternalQueryList(req StockTransferInternalQueryListReq) kry_model.Result[StockTransferInternalListResp]
 }

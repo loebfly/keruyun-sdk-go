@@ -491,3 +491,32 @@ type StockInOutDetailResp struct {
 	ServerCode int    `json:"serverCode"` // 服务编码
 	MessageId  string `json:"messageId"`  // 服务消息ID
 }
+
+type StockTransferInternalListResp struct {
+	Code    string `json:"code"`    // 业务响应码 10000：正常
+	Msg     string `json:"msg"`     // 响应信息
+	Success bool   `json:"success"` // 是否成功, true:成功，false:失败
+	Data    struct {
+		List []struct {
+			Id             string `json:"id"`             // 单据id
+			StoreId        string `json:"storeId"`        // 机构id
+			StoreName      string `json:"storeName"`      // 机构名字
+			BillNo         string `json:"billNo"`         // 单号
+			BussDate       string `json:"bussDate"`       // 业务日期
+			OutDepotId     string `json:"outDepotId"`     // 出库仓库id
+			OutDepotName   string `json:"outDepotName"`   // 出库仓库名字
+			InDepotId      string `json:"inDepotId"`      // 入库仓库id
+			InDepotName    string `json:"inDepotName"`    // 入库仓库名字
+			TotalAmt       int    `json:"totalAmt"`       // 成本总金额
+			Status         int    `json:"status"`         // 状态：961：暂存，963：提交，962：已审核，964：已驳回，965：已反审
+			CreateUserName string `json:"createUserName"` // 创建人
+			UpdateUserName string `json:"updateUserName"` // 修改人
+			CreateTime     string `json:"createTime"`     // 创建时间
+			UpdateTime     string `json:"updateTime"`     // 修改时间
+			Remarks        string `json:"remarks"`        // 备注
+		} `json:"list"` // 单据列表
+		Total int `json:"total"` // 总条数
+	} `json:"data"` // 数据
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
