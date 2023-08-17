@@ -1,4 +1,4 @@
-package kry_result
+package kry_model
 
 type Result[D any] struct {
 	Result      D      `json:"result"`

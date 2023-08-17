@@ -2,15 +2,15 @@ package standard_test
 
 import (
 	"github.com/loebfly/keruyun-sdk-go/keruyun"
-	"github.com/loebfly/keruyun-sdk-go/kry_config"
+	"github.com/loebfly/keruyun-sdk-go/kry_model"
 	"testing"
 )
 
 var shopTokenCache = map[int64]string{}
 
 func Test_standard(t *testing.T) {
-	t.Log("standard_test.go")
-	keruyun.RegisterSdk(kry_config.Config{
+	t.Log("api_test.go")
+	keruyun.RegisterSdk(kry_model.SdkConfig{
 		Version: "2.0",
 		SetTokenForShopIdHandle: func(shopId int64, token string) {
 			shopTokenCache[shopId] = token

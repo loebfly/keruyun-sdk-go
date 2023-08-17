@@ -1,4 +1,4 @@
-package standard
+package kry_standard
 
 type ShopQueryStoreDetailResp struct {
 	AddressProvince string `json:"addressProvince"` // 省

@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/loebfly/keruyun-sdk-go/kry_result"
-	"io"
+	"github.com/loebfly/keruyun-sdk-go/internal/config"
+	"github.com/loebfly/keruyun-sdk-go/kry_model"
 	"net/http"
 	"time"
 )
@@ -19,7 +19,7 @@ const (
 	DELETE HttpMethod = "DELETE"
 )
 
-func JsonToResult[D any](options JsonOptions) kry_result.Result[D] {
+func JsonToResult[D any](options JsonOptions) kry_model.Result[D] {
 	return toResult[D](JsonRequest(options))
 }
 
@@ -34,6 +34,9 @@ func JsonRequest(options JsonOptions) ([]byte, error) {
 	for k, v := range options.Header {
 		req.Header.Set(k, v)
 	}
+	// 设置content-type
+	req.Header.Set("Content-Type", "application/json;charset=utf-8")
+
 	// 设置请求参数
 	req.URL.RawQuery = options.GetSignQueryStr()
 
@@ -45,47 +48,86 @@ func JsonRequest(options JsonOptions) ([]byte, error) {
 	client := http.DefaultClient
 	client.Timeout = options.timeout
 
+	// 开始时间
+	startTime := time.Now()
+	reqTime := startTime.Format("2006-01-02 15:04:05.012")
+
+	var reqQuery = make(map[string]string)
+	for k, v := range req.URL.Query() {
+		reqQuery[k] = v[0]
+	}
+
 	// 发送请求
 	resp, err := client.Do(req)
+
+	// 结束时间
+	endTime := time.Now()
+	respTime := endTime.Format("2006-01-02 15:04:05.012")
+
+	respBuffer := new(bytes.Buffer)
+
+	// 外部打印请求日志
+	defer func() {
+		if config.Global.PrintApiLogHandle == nil {
+			return
+		}
+
+		var respBody = make(map[string]any)
+		if respBuffer != nil {
+			_ = json.Unmarshal(respBuffer.Bytes(), &respBody)
+		}
+
+		// 请求日志
+		reqCtx := kry_model.ReqCtx{
+			ReqTime:     reqTime,
+			RespTime:    respTime,
+			TTL:         int(endTime.Sub(startTime).Milliseconds()),
+			Method:      string(options.Method),
+			ContentType: "application/json;charset=utf-8",
+			Host:        options.Host,
+			URI:         options.Uri,
+			ReqQuery:    reqQuery,
+			ReqBody:     options.JSON,
+			RespBody:    respBody,
+		}
+		config.Global.PrintApiLogHandle(reqCtx)
+	}()
+
 	if err != nil {
 		return nil, err
 	}
-	// 关闭请求
-	defer func(Body io.ReadCloser) {
-		_ = Body.Close()
-	}(resp.Body)
+
 	// 读取响应
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("http status code: %d", resp.StatusCode)
 	}
 
-	buf := new(bytes.Buffer)
-	_, err = buf.ReadFrom(resp.Body)
+	_, err = respBuffer.ReadFrom(resp.Body)
 	if err != nil {
 		return nil, err
 	}
 	// 返回响应
-	return buf.Bytes(), nil
+	return respBuffer.Bytes(), nil
 }
 
 // toResult 将字符串转换为Result
-func toResult[D any](resp []byte, err error) kry_result.Result[D] {
+func toResult[D any](resp []byte, err error) kry_model.Result[D] {
 	if err != nil {
-		return kry_result.Result[D]{
+		return kry_model.Result[D]{
 			Code:    -999,
 			Message: err.Error(),
 		}
 	}
 	if resp == nil {
-		return kry_result.Result[D]{
+		return kry_model.Result[D]{
 			Code:    -999,
 			Message: "response is nil",
 		}
 	}
-	var result kry_result.Result[D]
+	var result kry_model.Result[D]
 	err = json.Unmarshal(resp, &result)
 	if err != nil {
-		return kry_result.Result[D]{
+		return kry_model.Result[D]{
 			Code:    -999,
 			Message: "response unmarshal failure",
 		}

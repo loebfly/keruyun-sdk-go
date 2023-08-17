@@ -1,4 +1,4 @@
-package standard
+package kry_standard
 
 type ShopQueryTableListReq struct {
 	ShopAreaIds []string `json:"shopAreaIds"` // 区域ID列表，为空表示查询全部区域

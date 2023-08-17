@@ -4,7 +4,7 @@ import (
 	"errors"
 	"github.com/loebfly/keruyun-sdk-go/internal/config"
 	"github.com/loebfly/keruyun-sdk-go/internal/network"
-	"github.com/loebfly/keruyun-sdk-go/standard"
+	"github.com/loebfly/keruyun-sdk-go/kry_standard"
 	"strconv"
 	"time"
 )
@@ -24,7 +24,7 @@ func (s standardApi) NewPostQuery() map[string]string {
 	}
 }
 
-func NewAPI(shopId int64) (standard.Api, error) {
+func NewAPI(shopId int64) (kry_standard.Api, error) {
 	// 获取Token
 	if config.Global.GetTokenForShopIdHandle != nil {
 		token := config.Global.GetTokenForShopIdHandle(shopId)
