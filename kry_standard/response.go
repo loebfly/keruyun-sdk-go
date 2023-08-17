@@ -520,3 +520,33 @@ type StockTransferInternalListResp struct {
 	ServerCode int    `json:"serverCode"` // 服务编码
 	MessageId  string `json:"messageId"`  // 服务消息ID
 }
+
+type StockTransferInternalDetailResp struct {
+	Code    string `json:"code"`    // 业务响应码 10000：正常
+	Msg     string `json:"msg"`     // 响应信息
+	Success bool   `json:"success"` // 是否成功, true:成功，false:失败
+	Data    []struct {
+		Id         string `json:"id"` // 单据id
+		DetailList []struct {
+			GoodsId       string `json:"goodsId"`       // 物品id
+			GoodsCode     string `json:"goodsCode"`     // 物品编码
+			GoodsName     string `json:"goodsName"`     // 物品名字
+			GoodsSpec     string `json:"goodsSpec"`     // 物品规格
+			UnitId        string `json:"unitId"`        // 标准单位id
+			UnitName      string `json:"unitName"`      // 标准单位名字
+			UnitPrice     int    `json:"unitPrice"`     // 成本单价
+			GoodsQty      int    `json:"goodsQty"`      // 数量
+			GoodsAmt      int    `json:"goodsAmt"`      // 成本金额
+			DualGoodsQty  int    `json:"dualGoodsQty"`  // 辅助单位数量
+			DualUnitName  string `json:"dualUnitName"`  // 辅助单位名字
+			DualUnitId    string `json:"dualUnitId"`    // 辅助单位id
+			Remarks       string `json:"remarks"`       // 备注
+			ProDate       string `json:"proDate"`       // 生产日期
+			ExpDate       string `json:"expDate"`       // 有效期至
+			QualityPeriod int    `json:"qualityPeriod"` // 保质期天数
+			GoodsBatchNo  string `json:"goodsBatchNo"`  // 批号
+		} `json:"detailList"` // 单据明细
+	} `json:"data"` // 返回数据
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}

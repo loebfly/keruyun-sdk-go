@@ -114,3 +114,7 @@ type StockTransferInternalQueryListReq struct {
 	PageNum         int    `json:"pageNum"`         // 页码(默认1)
 	PageSize        int    `json:"pageSize"`        // 页大小（默认20，最大为100）
 }
+
+type StockTransferInternalQueryDetailReq struct {
+	Ids []string `json:"ids"`
+}
