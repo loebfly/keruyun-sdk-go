@@ -26,4 +26,16 @@ type Api interface {
 	DishQueryDetail(req DishQueryDetailReq) kry_model.Result[DishDetailResp]
 	// DishQueryCategory 门店查询分类信息
 	DishQueryCategory(req DishQueryCategoryReq) kry_model.Result[DishCategoryResp]
+
+	/*
+		会员相关
+	*/
+	// CrmCreate 会员创建
+	CrmCreate(req CrmCreateReq) kry_model.Result[CrmCreateResp]
+	// CrmQueryByMobile 根据手机号查询会员
+	CrmQueryByMobile(req CrmQueryByMobileReq) kry_model.Result[CrmCustomerInfoResp]
+	// CrmQueryProperty 会员资产查询
+	CrmQueryProperty(req CrmQueryPropertyReq) kry_model.Result[CrmCustomerPropertyResp]
+	// CrmDirectCharge 储值充值接口
+	CrmDirectCharge(req CrmDirectChargeReq) kry_model.Result[CrmDirectChargeResp]
 }

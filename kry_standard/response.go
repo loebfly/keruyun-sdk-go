@@ -193,3 +193,96 @@ type DishCategoryResp struct {
 	ServerCode int    `json:"serverCode"` // 服务编码
 	MessageId  string `json:"messageId"`  // 服务消息ID
 }
+
+type CrmCreateResp struct {
+	Data struct {
+		CustomerId string `json:"customerId"` // 用户id
+	} `json:"data"`
+	Success    bool   `json:"success"`    // 是否成功, true成功, false失败
+	MsgCode    string `json:"msgCode"`    // success为false时的异常码
+	MsgInfo    string `json:"msgInfo"`    // success为false时的异常信息
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type CrmCustomerInfoResp struct {
+	Data struct {
+		Birthday   string `json:"birthday"`   // 生日日期,yyyy-MM-dd格式
+		CustomerId string `json:"customerId"` // 用户id
+		Gender     int    `json:"gender"`     // 用户性别,0代表女,1代表男,2代表其他
+		LevelDTO   struct {
+			LevelName string `json:"levelName"` // 等级名称
+			LevelNo   int    `json:"levelNo"`   // 等级级别
+		} `json:"levelDTO"` // 等级对象
+		Mobile string `json:"mobile"` // 手机号
+		Name   string `json:"name"`   // 用户名称
+		State  int    `json:"state"`  // 用户状态,1代表启用,0代表停用
+	} `json:"data"` // 数据体对象
+	Success    bool   `json:"success"`    // 请求请求结果, true代表成功, false代表失败
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type CrmCustomerPropertyResp struct {
+	Data struct {
+		CustomerDTO struct {
+			CustomerId string `json:"customerId"` // 用户id
+			State      int    `json:"state"`      // 用户状态
+			Mobile     string `json:"mobile"`     // 手机号
+		} `json:"customerDTO"` // 会员基础信息
+		PosCardDTOList []struct {
+			PosRechargeAccountList []struct {
+				RemainAvailableValue struct {
+					TotalValue int `json:"totalValue"` // 当前剩余可用储值总金额 = 当前剩余可用实储总金额 + 当前剩余可用赠储总金额，单位：分
+					RealValue  int `json:"realValue"`  // 当前剩余可用实储总金额，单位：分
+					GiftValue  int `json:"giftValue"`  // 当前剩余可用赠储总金额，单位：分
+				} `json:"remainAvailableValue"` // 当前剩余可用储值
+			} `json:"posRechargeAccountList"` // 储值账户
+			Status   string `json:"status"`   // 卡状态，SOLD：已出售；ACTIVED：已激活；STOP：已停用；INVALID：已作废；EXPIRED：已过期；REFUND：已退卡
+			CardId   string `json:"cardId"`   // 卡号id
+			CardType string `json:"cardType"` // 卡类型，MEMBER：会员卡；GIFT：礼品卡；PAY_MEMBER：付费会员卡
+		} `json:"posCardDTOList"` // 卡列表
+		NormalVoucherInstanceCount int `json:"normalVoucherInstanceCount"` // 可使用有效券张数
+		PointAccountDTO            struct {
+			RemainAvailableValue int `json:"remainAvailableValue"`
+		} `json:"pointAccountDTO"` // 积分账户
+	} `json:"data"` // 数据体
+	Success    bool   `json:"success"`    // 是否成功,true:成功,false:失败
+	ServerCode int    `json:"serverCode"` // 服务端返回码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type CrmDirectChargeResp struct {
+	Success bool   `json:"success"` // 是否成功,true:成功，false:失败
+	MsgCode string `json:"msgCode"` // success为false时的异常码
+	MsgInfo string `json:"msgInfo"` // success为false时的异常信息
+	Data    struct {
+		AccountId        string `json:"accountId"` // 储值账户id
+		RemainTotalValue struct {
+			RealValue  int64 `json:"realValue"`  // 实储余额，单位：分
+			GiftValue  int64 `json:"giftValue"`  // 赠储余额，单位：分
+			PreValue   int64 `json:"preValue"`   // 预储余额，单位：分
+			TotalValue int64 `json:"totalValue"` // 总余额=实储余额 + 赠储余额 + 预储余额，单位：分
+		} `json:"remainTotalValue"` // 储值账户余额 = 储值账户可用余额 + 储值账户预扣金额
+		RemainAvailableValue struct {
+			RealValue  int64 `json:"realValue"`  // 可用实储余额，单位：分
+			GiftValue  int64 `json:"giftValue"`  // 可用赠储余额，单位：分
+			PreValue   int64 `json:"preValue"`   // 可用预储余额，单位：分
+			TotalValue int64 `json:"totalValue"` // 可用总余额=可用实储余额 + 可用赠储余额 +可用预储余额，单位：分
+		} `json:"remainAvailableValue"` // 储值账户可用余额
+		PreDeductValue struct {
+			RealValue  int64 `json:"realValue"`  // 预扣实储金额，单位：分
+			GiftValue  int64 `json:"giftValue"`  // 预扣赠储金额，单位：分
+			PreValue   int64 `json:"preValue"`   // 预扣预储金额，单位：分
+			TotalValue int64 `json:"totalValue"` // 预扣总金额=预扣实储金额 + 预扣赠储金额 + 预扣预储金额，单位：分
+		} `json:"preDeductValue"` // 储值账户预扣金额
+		TotalValue struct {
+			RealValue  int64 `json:"realValue"`  // 累计实储金额，单位：分
+			GiftValue  int64 `json:"giftValue"`  // 累计赠储金额，单位：分
+			PreValue   int64 `json:"preValue"`   // 累计预储金额，单位：分
+			TotalValue int64 `json:"totalValue"` // 累计储值总金额=累计实储金额 +累计赠储金额 + 累计预储金额，单位：分
+		} `json:"totalValue"` // 储值累计总额
+	} `json:"data"` // 业务数据
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
