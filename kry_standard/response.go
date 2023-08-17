@@ -1,6 +1,6 @@
 package kry_standard
 
-type ShopQueryStoreDetailResp struct {
+type ShopStoreDetailResp struct {
 	AddressProvince string `json:"addressProvince"` // 省
 	Latitude        string `json:"latitude"`        // 纬度
 	OrgMode         string `json:"orgMode"`         // 机构类型：单店SINGLE,连锁CHAIN
@@ -25,7 +25,7 @@ type ShopQueryStoreDetailResp struct {
 	MessageId       string `json:"messageId"`       // 服务消息ID
 }
 
-type ShopQueryTableListResp struct {
+type ShopTableListResp struct {
 	PageNum   int `json:"pageNum"`   // 当前分页页数
 	PageSize  int `json:"pageSize"`  // 每页条目数
 	TotalNum  int `json:"totalNum"`  // 总条目数
@@ -41,19 +41,29 @@ type ShopQueryTableListResp struct {
 	ServerCode int    `json:"serverCode"` // 服务编码
 }
 
-type ShopQueryServiceFeeListResp struct {
-	MessageId       string `json:"messageId"`
+type ShopServiceFeeListResp struct {
+	MessageId       string `json:"messageId"` // 服务消息ID
 	ExtraChargeList []struct {
-		ExtraChargeId          string `json:"extraChargeId"`
-		Name                   string `json:"name"`
-		ExtraChargeType        string `json:"extraChargeType"`
-		CalcWay                string `json:"calcWay"`
-		CalcAmount             int    `json:"calcAmount"`
-		AutoAddOrderFlag       string `json:"autoAddOrderFlag"`
-		DiscountAfterCalcFlag  string `json:"discountAfterCalcFlag"`
-		AllowDiscountShareFlag string `json:"allowDiscountShareFlag"`
-		AllowDiscountFlag      string `json:"allowDiscountFlag"`
-		EnabledFlag            string `json:"enabledFlag"`
-	} `json:"extraChargeList"`
-	ServerCode int `json:"serverCode"`
+		ExtraChargeId          string `json:"extraChargeId"`          // 服务费ID
+		Name                   string `json:"name"`                   // 服务费名称
+		ExtraChargeType        string `json:"extraChargeType"`        // 服务费类型
+		CalcWay                string `json:"calcWay"`                // 计算方式,PERCENT按消费比例收取,PERSON按用餐人数收取,FIXED按固定金额收取
+		CalcAmount             int    `json:"calcAmount"`             // 计算数额:消费比例/固定金额/每人金额
+		AutoAddOrderFlag       string `json:"autoAddOrderFlag"`       // 是否自动加入订单，ON是，OFF否
+		DiscountAfterCalcFlag  string `json:"discountAfterCalcFlag"`  // 是否优惠后计算，ON是，OFF否
+		AllowDiscountShareFlag string `json:"allowDiscountShareFlag"` // 是否参与优惠分摊，ON是，OFF否
+		AllowDiscountFlag      string `json:"allowDiscountFlag"`      // 是否参与折扣，ON是，OFF否
+		EnabledFlag            string `json:"enabledFlag"`            // 启用状态，ON启用，OFF禁用
+	} `json:"extraChargeList"` // 服务费列表
+	ServerCode int `json:"serverCode"` // 服务编码
+}
+
+type ShopTableInfoResp struct {
+	MessageId        string `json:"messageId"`        // 服务消息ID
+	TableId          string `json:"tableId"`          // 桌台ID
+	TableName        string `json:"tableName"`        // 桌台名称
+	AreaId           string `json:"areaId"`           // 桌台所属区域ID
+	AreaName         string `json:"areaName"`         // 桌台所属区域名称
+	TablePersonCount int    `json:"tablePersonCount"` // 桌台用餐人数
+	ServerCode       int    `json:"serverCode"`       // 服务编码
 }

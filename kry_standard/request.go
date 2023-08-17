@@ -9,3 +9,11 @@ type ShopQueryTableListReq struct {
 type ShopQueryServiceFeeListReq struct {
 	TableAreaId string `json:"tableAreaId"` // 桌台所属区域ID
 }
+
+type ShopQueryTableInfoReq struct {
+	TableId string `json:"tableId"` // 桌台ID
+}
+
+type ShopQueryServiceFeeInfoReq struct {
+	ExtraChargeIds []string `json:"extraChargeIds"` // 服务费ID列表，最多100条
+}

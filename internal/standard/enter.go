@@ -14,13 +14,24 @@ type standardApi struct {
 	token  string
 }
 
-func (s standardApi) NewPostQuery() map[string]string {
+func (s standardApi) newPostQuery() map[string]string {
 	return map[string]string{
 		network.SignPtrAppKey:    config.Global.AppKey,
 		network.SingPtrShopId:    strconv.FormatInt(s.ShopId, 10),
 		network.SignPtrTimestamp: strconv.FormatInt(time.Now().Unix(), 10),
 		network.SignPtrVersion:   config.Global.Version,
 		network.SignPtrToken:     s.token,
+	}
+}
+
+func (s standardApi) newPostJsonOptions(uri string, body any) network.JsonOptions {
+	return network.JsonOptions{
+		Host:   config.Global.Domain,
+		Uri:    uri,
+		Method: network.POST,
+		Header: nil,
+		Query:  s.newPostQuery(),
+		JSON:   body,
 	}
 }
 
