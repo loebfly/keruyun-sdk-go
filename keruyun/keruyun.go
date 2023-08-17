@@ -15,6 +15,15 @@ func RegisterSdk(cfg kry_model.SdkConfig) {
 	if cfg.Version != "" {
 		internalConfig.Global.Version = cfg.Version
 	}
+	if cfg.SetTokenForShopIdHandle != nil {
+		internalConfig.Global.SetTokenForShopIdHandle = cfg.SetTokenForShopIdHandle
+	}
+	if cfg.GetTokenForShopIdHandle != nil {
+		internalConfig.Global.GetTokenForShopIdHandle = cfg.GetTokenForShopIdHandle
+	}
+	if cfg.PrintApiLogHandle != nil {
+		internalConfig.Global.PrintApiLogHandle = cfg.PrintApiLogHandle
+	}
 }
 
 // NewStandardAPI 创建智享版API

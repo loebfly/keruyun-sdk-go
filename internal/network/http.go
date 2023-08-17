@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/loebfly/keruyun-sdk-go/internal/config"
+	"github.com/loebfly/keruyun-sdk-go/internal/util"
 	"github.com/loebfly/keruyun-sdk-go/kry_model"
 	"net/http"
 	"time"
@@ -33,7 +34,7 @@ func JsonRequest(options JsonOptions) ([]byte, error) {
 		req.Header.Set(k, v)
 	}
 	// 设置content-type
-	req.Header.Set("Content-Type", "application/json;charset=utf-8")
+	req.Header.Set("Content-Type", "application/json")
 
 	// 设置请求参数
 	req.URL.RawQuery = options.GetSignQueryStr()
@@ -56,7 +57,7 @@ func JsonRequest(options JsonOptions) ([]byte, error) {
 	}
 
 	// 发送请求
-	resp, err := client.Do(req)
+	resp, doErr := client.Do(req)
 
 	// 结束时间
 	endTime := time.Now()
@@ -72,7 +73,26 @@ func JsonRequest(options JsonOptions) ([]byte, error) {
 
 		var respBody = make(map[string]any)
 		if respBuffer != nil {
-			_ = json.Unmarshal(respBuffer.Bytes(), &respBody)
+			unmarshalErr := json.Unmarshal(respBuffer.Bytes(), &respBody)
+			if unmarshalErr != nil {
+				util.Any(kry_model.Result[any]{
+					Code:    -999,
+					Message: unmarshalErr.Error(),
+				}).ToObject(&respBody)
+			}
+		}
+
+		if doErr != nil {
+			util.Any(kry_model.Result[any]{
+				Code:    -999,
+				Message: err.Error(),
+			}).ToObject(&respBody)
+		}
+		if resp.StatusCode != http.StatusOK {
+			util.Any(kry_model.Result[any]{
+				Code:    -999,
+				Message: fmt.Sprintf("http status code: %d", resp.StatusCode),
+			}).ToObject(&respBody)
 		}
 
 		// 请求日志
@@ -81,7 +101,7 @@ func JsonRequest(options JsonOptions) ([]byte, error) {
 			RespTime:    respTime,
 			TTL:         int(endTime.Sub(startTime).Milliseconds()),
 			Method:      string(options.Method),
-			ContentType: "application/json;charset=utf-8",
+			ContentType: "application/json",
 			Host:        options.Host,
 			URI:         options.Uri,
 			ReqQuery:    reqQuery,
