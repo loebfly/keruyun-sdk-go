@@ -550,3 +550,33 @@ type StockTransferInternalDetailResp struct {
 	ServerCode int    `json:"serverCode"` // 服务编码
 	MessageId  string `json:"messageId"`  // 服务消息ID
 }
+
+type StockCheckListResp struct {
+	Code    string `json:"code"`    // 业务响应码 10000：正常
+	Msg     string `json:"msg"`     // 响应信息
+	Success bool   `json:"success"` // 是否成功, true:成功，false:失败
+	Data    struct {
+		List []struct {
+			Id             string `json:"id"`             // 盘点单id
+			StoreId        string `json:"storeId"`        // 机构id
+			StoreName      string `json:"storeName"`      // 机构名称
+			DepotId        string `json:"depotId"`        // 仓库id
+			DepotName      string `json:"depotName"`      // 仓库名称
+			BussDate       string `json:"bussDate"`       // 盘点业务日期
+			BillNo         string `json:"billNo"`         // 盘点单号
+			CheckMode      int    `json:"checkMode"`      // 盘点类型（941日盘，942周盘，943月盘，944其他）
+			IsProfLoss     int    `json:"isProfLoss"`     // 盘盈盘亏（1盘盈，0盘亏）
+			Status         int    `json:"status"`         // 状态：961：暂存，963：提交，962：已审核，964：已驳回，965：已反审
+			TotalCheckAmt  int    `json:"totalCheckAmt"`  // 实盘总金额
+			TotalProfitAmt int    `json:"totalProfitAmt"` // 总盈亏金额
+			TotalAccAmt    int    `json:"totalAccAmt"`    // 总账面金额
+			CreateUserName string `json:"createUserName"` // 创建人名字
+			CreateTime     string `json:"createTime"`     // 创建时间
+			UpdateUserName string `json:"updateUserName"` // 更新人名字
+			UpdateTime     string `json:"updateTime"`     // 更新时间
+		} `json:"list"` // 盘点单列表
+		Total int `json:"total"` // 总条数
+	} `json:"data"` // 返回数据
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}

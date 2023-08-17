@@ -118,3 +118,16 @@ type StockTransferInternalQueryListReq struct {
 type StockTransferInternalQueryDetailReq struct {
 	Ids []string `json:"ids"`
 }
+
+type StockCheckQueryListReq struct {
+	StartDate       string `json:"startDate"`       // 盘点业务日期-开始（与最后更新时间不能同时为空）
+	EndDate         string `json:"endDate"`         // 盘点业务日期-开始
+	UpdateTimeStart string `json:"updateTimeStart"` // 最后更新时间-开始（与盘点业务日期不能同时为空）
+	UpdateTimeEnd   string `json:"updateTimeEnd"`   // 最后更新时间-结束
+	StoreId         string `json:"storeId"`         // 机构id
+	DepotId         string `json:"depotId"`         // 仓库id
+	Status          string `json:"status"`          // 状态 961：暂存，963：提交，962：已审核，964：已驳回，965：已反审
+	OrgType         int    `json:"orgType"`         // 机构类型 1：门店 2：公司
+	PageNum         int    `json:"pageNum"`         // 页码（默认1）
+	PageSize        int    `json:"pageSize"`        // 页大小（默认20，最大不能超过100）
+}

@@ -66,4 +66,6 @@ type Api interface {
 	StockTransferInternalQueryList(req StockTransferInternalQueryListReq) kry_model.Result[StockTransferInternalListResp]
 	// StockTransferInternalQueryDetail 组织内调拨订单详情
 	StockTransferInternalQueryDetail(req StockTransferInternalQueryDetailReq) kry_model.Result[StockTransferInternalDetailResp]
+	// StockCheckQueryList 盘点单列表查询
+	StockCheckQueryList(req StockCheckQueryListReq) kry_model.Result[StockCheckListResp]
 }
