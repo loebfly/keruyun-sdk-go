@@ -77,3 +77,30 @@ type OrderQueryListReq struct {
 		PageSize int `json:"pageSize"` // 页大小
 	} `json:"pageBean"` // 分页
 }
+
+type StockInOutQueryListReq struct {
+	StartDate       string `json:"startDate"`       // 业务日期-开始（不能与更新时间同时为空）
+	EndDate         string `json:"endDate"`         // 业务日期-结束
+	UpdateTimeStart string `json:"updateTimeStart"` // 更新时间-开始（不能与业务日期同时为空）
+	UpdateTimeEnd   string `json:"updateTimeEnd"`   // 更新时间-结束
+	OrgId           string `json:"orgId"`           // 机构id
+	DepotId         string `json:"depotId"`         // 仓库id
+	Status          int    `json:"status"`          // 状态：961：暂存，963：提交，962：已审核，964：已驳回，965：已反审，966：已作废
+	Type            int    `json:"type"`            // 类型 1：配送差异报损出库 2：手动添加的报损出库
+	OrgType         int    `json:"orgType"`         // 机构类型 1：门店 2：公司
+	PageNum         int    `json:"pageNum"`         // 页码（默认1）
+	PageSize        int    `json:"pageSize"`        // 页大小（默认20，最大为100）
+}
+
+type StockLossOutQueryDetailReq struct {
+	Type int      `json:"type"` // 类型 1：配送差异报损出库 2：手动添加报损出库
+	Ids  []string `json:"ids"`  // 单据id列表
+}
+
+type StockOtherInQueryDetailReq struct {
+	Ids []string `json:"ids"` // 单据id列表
+}
+
+type StockOtherOutQueryDetailReq struct {
+	Ids []string `json:"ids"`
+}

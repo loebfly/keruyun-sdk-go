@@ -433,3 +433,61 @@ type OrderListResp struct {
 	} `json:"data"` // 	数据
 	MessageId string `json:"messageId"` // 服务消息ID
 }
+
+type StockInOutListResp struct {
+	Code    string `json:"code"`    // 业务响应码 10000：正常
+	Msg     string `json:"msg"`     // 响应信息
+	Success bool   `json:"success"` // 是否成功, true:成功，false:失败
+	Data    struct {
+		List []struct {
+			Id             string `json:"id"`             // 单据id
+			OrgId          string `json:"orgId"`          // 机构id
+			OrgName        string `json:"orgName"`        // 机构名字
+			DepotId        string `json:"depotId"`        // 仓库id
+			DepotName      string `json:"depotName"`      // 仓库名字
+			BussDate       string `json:"bussDate"`       // 业务日期
+			BillNo         string `json:"billNo"`         // 单号
+			Status         int    `json:"status"`         // 状态 961：暂存，963：提交，962：已审核，964：已驳回，965：已反审，966：已作废
+			TotalAmt       int    `json:"totalAmt"`       // 成本总金额
+			TotalNum       int    `json:"totalNum"`       // 总数量
+			Remarks        string `json:"remarks"`        // 备注
+			CreateUserName string `json:"createUserName"` // 创建人
+			UpdateUserName string `json:"updateUserName"` // 修改人
+			CreateTime     string `json:"createTime"`     // 创建时间
+			UpdateTime     string `json:"updateTime"`     // 修改时间
+		} `json:"list"` // 单据列表
+		Total int `json:"total"` // 总条数
+	} `json:"data"` // 返回数据
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type StockInOutDetailResp struct {
+	Code    string `json:"code"`    // 业务响应码 10000：正常
+	Msg     string `json:"msg"`     // 响应信息
+	Success bool   `json:"success"` // 是否成功, true:成功，false:失败
+	Data    []struct {
+		Id         string `json:"id"` // 单据id
+		DetailList []struct {
+			GoodsId       string `json:"goodsId"`       // 物品id
+			GoodsName     string `json:"goodsName"`     // 物品名字
+			GoodsCode     string `json:"goodsCode"`     // 物品编码
+			GoodsSpec     string `json:"goodsSpec"`     // 物品规格
+			UnitId        string `json:"unitId"`        // 标准单位id
+			UnitName      string `json:"unitName"`      // 标准单位名字
+			DualUnitName  string `json:"dualUnitName"`  // 辅助单位名字
+			DualUnitId    string `json:"dualUnitId"`    // 辅助单位id
+			GoodsQty      int    `json:"goodsQty"`      // 出库数量
+			DualGoodsQty  int    `json:"dualGoodsQty"`  // 辅助单位出库数量
+			UnitPrice     int    `json:"unitPrice"`     // 成本单价
+			GoodsAmt      int    `json:"goodsAmt"`      // 成本金额
+			ProDate       string `json:"proDate"`       // 生产日期
+			ExpDate       string `json:"expDate"`       // 有效期至
+			QualityPeriod int    `json:"qualityPeriod"` // 保质期天数
+			GoodsBatchNo  string `json:"goodsBatchNo"`  // 批号
+			Remarks       string `json:"remarks"`       // 备注
+		} `json:"detailList"` // 单据明细列表
+	} `json:"data"` // 返回数据
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}

@@ -46,4 +46,20 @@ type Api interface {
 	OrderQueryDetail(req OrderQueryDetailReq) kry_model.Result[OrderDetailResp]
 	// OrderQueryList 订单列表查询接口
 	OrderQueryList(req OrderQueryListReq) kry_model.Result[OrderListResp]
+
+	/*
+		供应链2.0
+	*/
+	// StockLossOutQueryList 报损出库单列表查询
+	StockLossOutQueryList(req StockInOutQueryListReq) kry_model.Result[StockInOutListResp]
+	// StockLossOutQueryDetail 报损出库单详情
+	StockLossOutQueryDetail(req StockLossOutQueryDetailReq) kry_model.Result[StockInOutDetailResp]
+	// StockOtherInQueryDetail 其他入库单详情
+	StockOtherInQueryDetail(req StockOtherInQueryDetailReq) kry_model.Result[StockInOutDetailResp]
+	// StockOtherInQueryList 其他入库单列表查询
+	StockOtherInQueryList(req StockInOutQueryListReq) kry_model.Result[StockInOutListResp]
+	// StockOtherOutQueryList 其他出库单列表查询
+	StockOtherOutQueryList(req StockInOutQueryListReq) kry_model.Result[StockInOutListResp]
+	// StockOtherOutQueryDetail 其他出库单详情
+	StockOtherOutQueryDetail(req StockOtherOutQueryDetailReq) kry_model.Result[StockInOutDetailResp]
 }

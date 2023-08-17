@@ -14,6 +14,10 @@ type standardApi struct {
 	token  string
 }
 
+func newApi(shopId int64, token string) kry_standard.Api {
+	return &standardApi{ShopId: shopId, token: token}
+}
+
 func (s standardApi) newPostQuery() map[string]string {
 	return map[string]string{
 		network.SignPtrAppKey:    config.Global.AppKey,
@@ -40,7 +44,7 @@ func NewAPI(shopId int64) (kry_standard.Api, error) {
 	if config.Global.GetTokenForShopIdHandle != nil {
 		token := config.Global.GetTokenForShopIdHandle(shopId)
 		if token != "" {
-			return &standardApi{ShopId: shopId, token: token}, nil
+			return newApi(shopId, token), nil
 		}
 	}
 
@@ -63,5 +67,5 @@ func NewAPI(shopId int64) (kry_standard.Api, error) {
 	if config.Global.SetTokenForShopIdHandle != nil {
 		config.Global.SetTokenForShopIdHandle(shopId, res.Result["token"])
 	}
-	return &standardApi{ShopId: shopId, token: res.Result["token"]}, nil
+	return newApi(shopId, res.Result["token"]), nil
 }
