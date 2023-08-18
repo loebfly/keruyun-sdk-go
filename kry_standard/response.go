@@ -521,7 +521,7 @@ type StockTransferInternalListResp struct {
 	MessageId  string `json:"messageId"`  // 服务消息ID
 }
 
-type StockTransferInternalDetailResp struct {
+type StockTransferInOutDetailResp struct {
 	Code    string `json:"code"`    // 业务响应码 10000：正常
 	Msg     string `json:"msg"`     // 响应信息
 	Success bool   `json:"success"` // 是否成功, true:成功，false:失败
@@ -577,6 +577,165 @@ type StockCheckListResp struct {
 		} `json:"list"` // 盘点单列表
 		Total int `json:"total"` // 总条数
 	} `json:"data"` // 返回数据
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type StockCheckDetailResp struct {
+	Code    string `json:"code"`    // 业务响应码 10000：正常
+	Msg     string `json:"msg"`     // 响应信息
+	Success bool   `json:"success"` // 是否成功, true:成功，false:失败
+	Data    struct {
+		Id         string `json:"id"` // 单据id
+		DetailList []struct {
+			GoodsId              string `json:"goodsId"`              // 物品id
+			GoodsName            string `json:"goodsName"`            // 物品名字
+			GoodsCode            string `json:"goodsCode"`            // 物品编码
+			GoodsSpec            string `json:"goodsSpec"`            // 物品规格
+			UnitId               string `json:"unitId"`               // 标准单位id
+			UnitName             string `json:"unitName"`             // 标准单位名字
+			CheckQty             int    `json:"checkQty"`             // 实盘数量
+			AccAmt               int    `json:"accAmt"`               // 账面金额
+			AccQty               int    `json:"accQty"`               // 账面数量
+			ProfLossQty          int    `json:"profLossQty"`          // 盈亏数量
+			ProfLossAmt          int    `json:"profLossAmt"`          // 盈亏金额
+			InventoryProfitQty   int    `json:"inventoryProfitQty"`   // 盘盈数量
+			InventoryProfitPrice int    `json:"inventoryProfitPrice"` // 盘盈单价
+			InventoryProfitAmt   int    `json:"inventoryProfitAmt"`   // 盘盈金额
+			InventoryLossQty     int    `json:"inventoryLossQty"`     // 盘亏数量
+			InventoryLossPrice   int    `json:"inventoryLossPrice"`   // 盘亏单价
+			InventoryLossAmt     int    `json:"inventoryLossAmt"`     // 盘亏金额
+			Remarks              string `json:"remarks"`              // 备注
+			DualGoodsQty         int    `json:"dualGoodsQty"`         // 辅助数量
+			DualUnitName         string `json:"dualUnitName"`         // 辅助单位名字
+			DualUnitId           string `json:"dualUnitId"`           // 辅助单位id
+			DualProfLossQty      int    `json:"dualProfLossQty"`      // 辅助单位盈亏数
+			QualityPeriodFlag    int    `json:"qualityPeriodFlag"`    // 保质期开关 0：未开启 1：已开启
+			GoodsBatchFlag       int    `json:"goodsBatchFlag"`       // 批次开关 0：未开启 1:已开启
+			ProDate              string `json:"proDate"`              // 生产日期
+			ExpDate              string `json:"expDate"`              // 有效期至
+			QualityPeriod        int    `json:"qualityPeriod"`        // 保质期天数
+			GoodsBatchNo         string `json:"goodsBatchNo"`         // 批号
+			CheckAmt             int    `json:"checkAmt"`             // 实盘金额
+			DualAccQty           int    `json:"dualAccQty"`           // 辅助单位账面数
+		} `json:"detailList"` // 单据明细
+	} `json:"data"` // 返回数据
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type StockSaleInOutDetailResp struct {
+	Code string `json:"code"` // 业务响应码 10000：正常
+	Msg  string `json:"msg"`  // 响应信息
+	Data []struct {
+		Id         string `json:"id"` // 单据id
+		DetailList []struct {
+			BillId       string `json:"billId"`       // 单据id
+			GoodsId      string `json:"goodsId"`      // 物品id
+			GoodsName    string `json:"goodsName"`    // 物品名称
+			GoodsCode    string `json:"goodsCode"`    // 物品编码
+			GoodsSpec    string `json:"goodsSpec"`    // 物品规格
+			GoodsQty     int    `json:"goodsQty"`     // 出库数量
+			GoodsAmt     int    `json:"goodsAmt"`     // 出库金额
+			UnitId       string `json:"unitId"`       // 单位id
+			UnitName     string `json:"unitName"`     // 单位名称
+			UnitPrice    int    `json:"unitPrice"`    // 单价
+			GoodsBatchNo string `json:"goodsBatchNo"` // 批号
+			Remarks      string `json:"remarks"`      // 备注
+		} `json:"detailList"` // 单据物品明细
+	} `json:"data"`
+	Success    bool   `json:"success"`    // 是否成功, true:成功，false:失败
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type StockSaleOutInOutListResp struct {
+	Code    string `json:"code"`    // 业务响应码 10000：正常
+	Msg     string `json:"msg"`     // 响应信息
+	Success bool   `json:"success"` // 是否成功, true:成功，false:失败
+	Data    struct {
+		List []struct {
+			Id         string `json:"id"`         // 单据id
+			TenantId   string `json:"tenantId"`   // 商户id
+			StoreId    string `json:"storeId"`    // 门店id
+			StoreName  string `json:"storeName"`  // 门店名称
+			DepotId    string `json:"depotId"`    // 仓库id
+			DepotName  string `json:"depotName"`  // 仓库名称
+			BussDate   string `json:"bussDate"`   // 业务日期
+			TotalAmt   int    `json:"totalAmt"`   // 总金额
+			Remarks    string `json:"remarks"`    // 备注
+			CreateTime string `json:"createTime"` // 创建时间
+			UpdateTime string `json:"updateTime"` // 修改时间
+		} `json:"list"` // 单据列表
+		Total int `json:"total"` // 总条数
+	} `json:"data"` // 返回数据
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type StockOtherInOutReceiveResp struct {
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+	Success    bool   `json:"success"`    // 是否成功 true：处理成功 false：处理失败
+	Code       string `json:"code"`       // 响应码
+	Msg        string `json:"msg"`        // 错误信息
+}
+
+type StockPurchaseInOutReceiveResp struct {
+	ServerCode int    `json:"serverCode"` // 服务编码
+	Msg        string `json:"msg"`        // 结果说明
+	Data       struct {
+		BillNo string `json:"billNo"` // 单据编号
+		Id     string `json:"id"`     // 单据id
+	} `json:"data"` // 执行结果
+	Success   bool   `json:"success"`   // 执行结果
+	MessageId string `json:"messageId"` // 服务消息ID
+}
+
+type StockQueryResp struct {
+	Code    string `json:"code"`    // 业务响应码 10000：成功
+	Msg     string `json:"msg"`     // 响应消息
+	Success bool   `json:"success"` // 业务执行状态 true：成功 false：失败
+	Data    struct {
+		List []struct {
+			OrgId        string `json:"orgId"`        // 组织ID
+			OrgName      string `json:"orgName"`      // 组织名称
+			DepotId      string `json:"depotId"`      // 仓库ID
+			DepotName    string `json:"depotName"`    // 仓库名称
+			CateId       string `json:"cateId"`       // 物品类别ID
+			CateName     string `json:"cateName"`     // 物品类别名称
+			GoodsId      string `json:"goodsId"`      // 物品ID
+			GoodsCode    string `json:"goodsCode"`    // 物品编码
+			GoodsName    string `json:"goodsName"`    // 物品名称
+			GoodsSpec    string `json:"goodsSpec"`    // 物品规格
+			UnitId       string `json:"unitId"`       // 标准单位ID
+			UnitName     string `json:"unitName"`     // 标准单位名称
+			CurrQty      int    `json:"currQty"`      // 标准数量
+			DualUnitId   string `json:"dualUnitId"`   // 辅助单位ID
+			DualUnitName string `json:"dualUnitName"` // 辅助单位名称
+			DualCurrQty  int    `json:"dualCurrQty"`  // 辅助单位数量
+			AverPrice    int    `json:"averPrice"`    // 成本单价
+			CurrAmt      int    `json:"currAmt"`      // 金额
+		} `json:"list"` // 单据明细列表
+		Total int `json:"total"` // 总条数
+	} `json:"data"` // 数据
+	ServerCode int    `json:"serverCode"` // 服务编码
+	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type OrgQueryResp struct {
+	Code    string `json:"code"`    // 业务响应码 10000代表成功，其他都是失败。
+	Msg     string `json:"msg"`     // 接口返回说明，成功时返回SUCCESS，失败时返回具体错误信息
+	Success bool   `json:"success"` // 接口是否成功，对应code的10000
+	Data    []struct {
+		OrgId     string `json:"orgId"`     // 机构ID，始终有值
+		OrgName   string `json:"orgName"`   // 机构名称
+		OrgType   int    `json:"orgType"`   // 机构类型，同入参的类型枚举
+		DepotId   string `json:"depotId"`   // 仓库ID，只有查询仓库信息时才有值
+		DepotCode string `json:"depotCode"` // 仓库编码
+		DepotName string `json:"depotName"` // 仓库名称
+		TenantId  string `json:"tenantId"`  // 商户ID
+	} `json:"data"` // 接口返回数据体
 	ServerCode int    `json:"serverCode"` // 服务编码
 	MessageId  string `json:"messageId"`  // 服务消息ID
 }

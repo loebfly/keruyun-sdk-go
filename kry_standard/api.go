@@ -65,7 +65,33 @@ type Api interface {
 	// StockTransferInternalQueryList 组织内调拨订单列表查询
 	StockTransferInternalQueryList(req StockTransferInternalQueryListReq) kry_model.Result[StockTransferInternalListResp]
 	// StockTransferInternalQueryDetail 组织内调拨订单详情
-	StockTransferInternalQueryDetail(req StockTransferInternalQueryDetailReq) kry_model.Result[StockTransferInternalDetailResp]
+	StockTransferInternalQueryDetail(req StockTransferInternalQueryDetailReq) kry_model.Result[StockTransferInOutDetailResp]
 	// StockCheckQueryList 盘点单列表查询
 	StockCheckQueryList(req StockCheckQueryListReq) kry_model.Result[StockCheckListResp]
+	// StockCheckQueryDetail 盘点单详情
+	StockCheckQueryDetail(req StockCheckQueryDetailReq) kry_model.Result[StockCheckDetailResp]
+	// StockTransferOutQueryDetail 组织间调拨出库单详情
+	StockTransferOutQueryDetail(req StockTransferInOutQueryDetailReq) kry_model.Result[StockTransferInOutDetailResp]
+	// StockTransferOutStoreToStoreQueryList 组织间调拨出库单列表查询
+	StockTransferOutStoreToStoreQueryList(req StockTransferInOutStoreToStoreQueryListReq) kry_model.Result[StockInOutListResp]
+	// StockTransferInStoreToStoreQueryList 组织间调拨入库单列表
+	StockTransferInStoreToStoreQueryList(req StockTransferInOutStoreToStoreQueryListReq) kry_model.Result[StockInOutListResp]
+	// StockTransferInQueryDetail 组织间调拨入库单详情
+	StockTransferInQueryDetail(req StockTransferInOutQueryDetailReq) kry_model.Result[StockTransferInOutDetailResp]
+	// StockSaleOutQueryDetail 消耗出库单详情
+	StockSaleOutQueryDetail(req StockSaleOutQueryDetailReq) kry_model.Result[StockSaleInOutDetailResp]
+	// StockSaleOutQueryList 消耗出库单列表查询
+	StockSaleOutQueryList(req StockSaleInOutQueryListReq) kry_model.Result[StockSaleOutInOutListResp]
+	// StockOtherInReceive 接收其他入库单
+	StockOtherInReceive(req StockOtherInReceiveReq) kry_model.Result[StockOtherInOutReceiveResp]
+	// StockOtherOutReceive 接收其他出库单
+	StockOtherOutReceive(req StockOtherOutReceiveReq) kry_model.Result[StockOtherInOutReceiveResp]
+	// StockPurchaseInReceive 接收采购入库(门店)
+	StockPurchaseInReceive(req StockPurchaseInReceiveReq) kry_model.Result[StockPurchaseInOutReceiveResp]
+	// StockPurchaseBackReceive 接收采购退货出库（门店）
+	StockPurchaseBackReceive(req StockPurchaseBackReceiveReq) kry_model.Result[StockPurchaseInOutReceiveResp]
+	// StockQuery 库存信息查询
+	StockQuery(req StockQueryReq) kry_model.Result[StockQueryResp]
+	// OrgQuery 查询组织机构信息
+	OrgQuery(req OrgQueryReq) kry_model.Result[OrgQueryResp]
 }
