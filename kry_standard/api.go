@@ -6,6 +6,7 @@ type Api interface {
 	/*
 		门店相关接口
 	*/
+
 	// ShopQueryStoreDetail 根据门店id获取门店详情
 	ShopQueryStoreDetail() kry_model.Result[ShopStoreDetailResp]
 	// ShopQueryTableList 获取门店桌台列表
@@ -20,6 +21,7 @@ type Api interface {
 	/*
 		菜品相关接口
 	*/
+
 	// DishQueryPage 门店分页查询菜品基本信息
 	DishQueryPage(req DishQueryPageReq) kry_model.Result[DishPageResp]
 	// DishQueryDetail 门店查询菜品详情
@@ -30,6 +32,7 @@ type Api interface {
 	/*
 		会员相关
 	*/
+
 	// CrmCreate 会员创建
 	CrmCreate(req CrmCreateReq) kry_model.Result[CrmCreateResp]
 	// CrmQueryByMobile 根据手机号查询会员
@@ -42,6 +45,7 @@ type Api interface {
 	/*
 		订单相关
 	*/
+
 	// OrderQueryDetail 订单详情查询接口
 	OrderQueryDetail(req OrderQueryDetailReq) kry_model.Result[OrderDetailResp]
 	// OrderQueryList 订单列表查询接口
@@ -50,6 +54,7 @@ type Api interface {
 	/*
 		供应链2.0
 	*/
+
 	// StockLossOutQueryList 报损出库单列表查询
 	StockLossOutQueryList(req StockInOutQueryListReq) kry_model.Result[StockInOutListResp]
 	// StockLossOutQueryDetail 报损出库单详情
