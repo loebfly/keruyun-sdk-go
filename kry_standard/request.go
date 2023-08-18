@@ -165,79 +165,87 @@ type StockSaleInOutQueryListReq struct {
 }
 
 type StockOtherInReceiveReq struct {
-	OrgId          string `json:"orgId"`          // 库存组织id
-	DepotId        string `json:"depotId"`        // 入库仓库id
-	BussDate       string `json:"bussDate"`       // 业务日期
-	BusinessType   string `json:"businessType"`   // 业务类型(固定传入)：0001
-	Remarks        string `json:"remarks"`        // 备注
-	CreateUserId   string `json:"createUserId"`   // 创建人id(如果没有，默认传system)
-	CreateUserName string `json:"createUserName"` // 创建人名称
-	DetailList     []struct {
-		GoodsCode    string `json:"goodsCode"`    // 物品编码
-		GoodsBatchNo string `json:"goodsBatchNo"` // 实物批号
-		ProDate      string `json:"proDate"`      // 生产日期
-		ExpDate      string `json:"expDate"`      // 有效期至
-		GoodsQty     int    `json:"goodsQty"`     // 标准单位入库数量
-		DualGoodsQty int    `json:"dualGoodsQty"` // 辅助单位入库数量
-		UnitPrice    int    `json:"unitPrice"`    // 成本单价
-		GoodsAmt     int    `json:"goodsAmt"`     // 成本金额
-		Remarks      string `json:"remarks"`      // 备注
-	} `json:"detailList"` // 入库物品明细
+	OrgId          string                      `json:"orgId"`          // 库存组织id
+	DepotId        string                      `json:"depotId"`        // 入库仓库id
+	BussDate       string                      `json:"bussDate"`       // 业务日期
+	BusinessType   string                      `json:"businessType"`   // 业务类型(固定传入)：0001
+	Remarks        string                      `json:"remarks"`        // 备注
+	CreateUserId   string                      `json:"createUserId"`   // 创建人id(如果没有，默认传system)
+	CreateUserName string                      `json:"createUserName"` // 创建人名称
+	DetailList     []StockOtherInReceiveDetail `json:"detailList"`     // 入库物品明细
+}
+
+type StockOtherInReceiveDetail struct {
+	GoodsCode    string `json:"goodsCode"`    // 物品编码
+	GoodsBatchNo string `json:"goodsBatchNo"` // 实物批号
+	ProDate      string `json:"proDate"`      // 生产日期
+	ExpDate      string `json:"expDate"`      // 有效期至
+	GoodsQty     int    `json:"goodsQty"`     // 标准单位入库数量
+	DualGoodsQty int    `json:"dualGoodsQty"` // 辅助单位入库数量
+	UnitPrice    int    `json:"unitPrice"`    // 成本单价
+	GoodsAmt     int    `json:"goodsAmt"`     // 成本金额
+	Remarks      string `json:"remarks"`      // 备注
 }
 
 type StockOtherOutReceiveReq struct {
-	OrgId          string `json:"orgId"`          // 库存组织id
-	DepotId        string `json:"depotId"`        // 入库仓库id
-	BussDate       string `json:"bussDate"`       // 业务日期
-	BusinessType   string `json:"businessType"`   // 业务类型(固定传入)：0002
-	Remarks        string `json:"remarks"`        // 备注
-	CreateUserId   string `json:"createUserId"`   // 创建人id(如果没有，默认传system)
-	CreateUserName string `json:"createUserName"` // 创建人名称
-	DetailList     []struct {
-		GoodsCode    string `json:"goodsCode"`    // 物品编码
-		GoodsBatchNo string `json:"goodsBatchNo"` // 实物批号
-		ProDate      string `json:"proDate"`      // 生产日期
-		ExpDate      string `json:"expDate"`      // 有效期至
-		GoodsQty     int    `json:"goodsQty"`     // 标准单位入库数量
-		DualGoodsQty int    `json:"dualGoodsQty"` // 辅助单位入库数量
-		Remarks      string `json:"remarks"`      // 备注
-	} `json:"detailList"` // 入库物品明细
+	OrgId          string                       `json:"orgId"`          // 库存组织id
+	DepotId        string                       `json:"depotId"`        // 入库仓库id
+	BussDate       string                       `json:"bussDate"`       // 业务日期
+	BusinessType   string                       `json:"businessType"`   // 业务类型(固定传入)：0002
+	Remarks        string                       `json:"remarks"`        // 备注
+	CreateUserId   string                       `json:"createUserId"`   // 创建人id(如果没有，默认传system)
+	CreateUserName string                       `json:"createUserName"` // 创建人名称
+	DetailList     []StockOtherOutReceiveDetail `json:"detailList"`     // 入库物品明细
+}
+
+type StockOtherOutReceiveDetail struct {
+	GoodsCode    string `json:"goodsCode"`    // 物品编码
+	GoodsBatchNo string `json:"goodsBatchNo"` // 实物批号
+	ProDate      string `json:"proDate"`      // 生产日期
+	ExpDate      string `json:"expDate"`      // 有效期至
+	GoodsQty     int    `json:"goodsQty"`     // 标准单位入库数量
+	DualGoodsQty int    `json:"dualGoodsQty"` // 辅助单位入库数量
+	Remarks      string `json:"remarks"`      // 备注
 }
 
 type StockPurchaseInReceiveReq struct {
-	PurchaseDate string `json:"purchaseDate"` // 采购日期
-	ArrivalDate  string `json:"arrivalDate"`  // 到货日期
-	ThirdBillNo  string `json:"thirdBillNo"`  // 第三方单号
-	Remarks      string `json:"remarks"`      // 备注
-	OrgId        string `json:"orgId"`        // 门店机构id
-	DepotId      string `json:"depotId"`      // 仓库id
-	SupplyId     string `json:"supplyId"`     // 供应商id
-	Details      []struct {
-		GoodsId  string  `json:"goodsId"`  // 物品id
-		OrdNum   float64 `json:"ordNum"`   // 采购单位数量
-		GoodsAmt int     `json:"goodsAmt"` // 物品金额（含税）
-		DualNum  int     `json:"dualNum"`  // 辅助单位数量
-		TaxRatio string  `json:"taxRatio"` // 税率
-		Remarks  string  `json:"remarks"`  // 物品备注
-	} `json:"details"` // 入库物品明细
-	UserName string `json:"userName"` // 操作人
+	PurchaseDate string                         `json:"purchaseDate"` // 采购日期
+	ArrivalDate  string                         `json:"arrivalDate"`  // 到货日期
+	ThirdBillNo  string                         `json:"thirdBillNo"`  // 第三方单号
+	Remarks      string                         `json:"remarks"`      // 备注
+	OrgId        string                         `json:"orgId"`        // 门店机构id
+	DepotId      string                         `json:"depotId"`      // 仓库id
+	SupplyId     string                         `json:"supplyId"`     // 供应商id
+	Details      []StockPurchaseInReceiveDetail `json:"details"`      // 入库物品明细
+	UserName     string                         `json:"userName"`     // 操作人
+}
+
+type StockPurchaseInReceiveDetail struct {
+	GoodsId  string  `json:"goodsId"`  // 物品id
+	OrdNum   float64 `json:"ordNum"`   // 采购单位数量
+	GoodsAmt int     `json:"goodsAmt"` // 物品金额（含税）
+	DualNum  int     `json:"dualNum"`  // 辅助单位数量
+	TaxRatio string  `json:"taxRatio"` // 税率
+	Remarks  string  `json:"remarks"`  // 物品备注
 }
 
 type StockPurchaseBackReceiveReq struct {
-	OrgId         string `json:"orgId"`    // 门店机构id
-	SupplyId      string `json:"supplyId"` // 供应商id
-	DepotId       string `json:"depotId"`  // 仓库id
-	BussDate      string `json:"bussDate"` // 业务日期
-	Remarks       string `json:"remarks"`  // 备注
-	UserName      string `json:"userName"` // 操作人
-	DetailDTOList []struct {
-		GoodsId  string `json:"goodsId"`  // 物品id
-		UnitNum  string `json:"unitNum"`  // 标准单位数量
-		DualNum  string `json:"dualNum"`  // 辅助单位数量
-		TaxRatio string `json:"taxRatio"` // 税率
-		GoodsAmt string `json:"goodsAmt"` // 物品金额（含税）
-		Remarks  string `json:"remarks"`  // 备注
-	} `json:"detailDTOList"` // 待退货明细
+	OrgId         string                              `json:"orgId"`         // 门店机构id
+	SupplyId      string                              `json:"supplyId"`      // 供应商id
+	DepotId       string                              `json:"depotId"`       // 仓库id
+	BussDate      string                              `json:"bussDate"`      // 业务日期
+	Remarks       string                              `json:"remarks"`       // 备注
+	UserName      string                              `json:"userName"`      // 操作人
+	DetailDTOList []StockPurchaseBackReceiveDetailDTO `json:"detailDTOList"` // 待退货明细
+}
+
+type StockPurchaseBackReceiveDetailDTO struct {
+	GoodsId  string `json:"goodsId"`  // 物品id
+	UnitNum  string `json:"unitNum"`  // 标准单位数量
+	DualNum  string `json:"dualNum"`  // 辅助单位数量
+	TaxRatio string `json:"taxRatio"` // 税率
+	GoodsAmt string `json:"goodsAmt"` // 物品金额（含税）
+	Remarks  string `json:"remarks"`  // 备注
 }
 
 type StockQueryReq struct {
