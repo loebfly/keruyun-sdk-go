@@ -72,15 +72,16 @@ type DishPageResp struct {
 	Value struct {
 		Total    int `json:"total"` // 数据总数
 		DataList []struct {
-			DishId     string `json:"dishId"`     // 菜品ID
-			DishName   string `json:"dishName"`   // 菜品名称
-			DishDesc   string `json:"dishDesc"`   // 菜品描述
-			CategoryId string `json:"categoryId"` // 分类ID
-			Sort       int    `json:"sort"`       // 排序值
-			HelpCode   string `json:"helpCode"`   // 助记码
-			DishType   string `json:"dishType"`   // 菜品类型， SINGLE：单菜 ，COMBO：套餐， SIDE：配料
-			State      string `json:"state"`      // 菜品状态
-			WeighFlag  string `json:"weighFlag"`  // 称重菜标识, Y:是，N:否
+			DishId           string   `json:"dishId"`           // 菜品ID
+			DishName         string   `json:"dishName"`         // 菜品名称
+			DishDesc         string   `json:"dishDesc"`         // 菜品描述
+			CategoryId       string   `json:"categoryId"`       // 分类ID
+			Sort             int      `json:"sort"`             // 排序值
+			HelpCode         string   `json:"helpCode"`         // 助记码
+			DishType         string   `json:"dishType"`         // 菜品类型， SINGLE：单菜 ，COMBO：套餐， SIDE：配料
+			State            string   `json:"state"`            // 菜品状态
+			WeighFlag        string   `json:"weighFlag"`        // 称重菜标识, Y:是，N:否
+			DishImageUrlList []string `json:"dishImageUrlList"` //菜品图片列表
 		} `json:"dataList"` // 具体数据
 	} `json:"value"` // 业务结果
 	Success    string `json:"success"`    // 是否成功, true:成功，false:失败
