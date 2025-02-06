@@ -42,8 +42,23 @@ type CrmCreateReq struct {
 	Birthday string `json:"birthday"` // 生日日期,yyyy-MM-dd格式
 }
 
+type CrmUpdateReq struct {
+	Birthday     int64  `json:"birthday"`
+	Address      string `json:"address"`
+	Gender       int    `json:"gender"`
+	Remark       string `json:"remark"`
+	CustomerType int    `json:"customerType"` // 顾客类型
+	CustomerId   string `json:"customerId"`
+	Name         string `json:"name"`
+	Invoice      string `json:"invoice"`
+	Email        string `json:"email"`
+}
+
 type CrmQueryByMobileReq struct {
 	Mobile string `json:"mobile"`
+}
+type CrmQueryByIdsReq struct {
+	CustomerIds []int `json:"customerIds"`
 }
 
 type CrmQueryPropertyReq struct {
@@ -62,6 +77,77 @@ type CrmDirectChargeReq struct {
 	OperatorId       string `json:"operatorId"`       // 操作人id（数字字符串，长度不超过64位）
 }
 
+type CrmTemplateListReq struct {
+	TypeList   []string `json:"typeList"`
+	StatusList []string `json:"statusList"`
+	PageNo     string   `json:"pageNo"`
+	PageSize   string   `json:"pageSize"`
+}
+
+var TypeList = map[int]string{
+	1: "CASH",               // 代金券
+	2: "DISCOUNT",           // 折扣券
+	3: "GIFT",               // 礼品券
+	4: "CONDITION_DISCOUNT", // 第N份折扣券
+	5: "BOUGHT_GIFT",        // 买A赠B券
+}
+
+var StatusList = map[int]string{
+	1: "UNUSED",      // 未使用
+	2: "USED",         // 使用中
+	3: "NO_INVENTORY", // 无库存
+	4: "INVALID",      // 已失效
+	5: "AUDITING",     // 待审核
+	6: "REJECTED",     //  驳回
+}
+
+var MemberCouponStatusList = map[int]string{
+	1: "NORMAL",  // 未使用
+	2: "FREEZED", // 冻结中
+	3: "INVALID", // 已失效
+	4: "EXPIRED", // 已过期
+	5: "ISUSED",  // 已使用
+}
+
+type CrmTemplateInfoReq struct {
+	TemplateId  string `json:"templateId"`
+	NeedDeleted bool   `json:"needDeleted"`
+}
+
+type CrmTemplateShopReq struct {
+	PageNo     string `json:"pageNo"`
+	PageSize   string `json:"pageSize"`
+	TemplateId string `json:"templateId"`
+}
+
+type CrmTemplateDishReq struct {
+	PageNo     string `json:"pageNo"`
+	PageSize   string `json:"pageSize"`
+	TemplateId string `json:"templateId"`
+}
+
+type CrmCouponSendReq struct {
+	ActivityId       string `json:"activityId"`
+	OutPreInstanceId string `json:"outPreInstanceId"`
+	CustomerId       string `json:"customerId"`
+	TemplateId       string `json:"templateId"`
+}
+
+type CrmCouponInvalidReq struct {
+	ResourceCodes []string `json:"resourceCodes"`
+}
+
+type CrmCouponQueryReq struct {
+	PageNo     string   `json:"pageNo"`
+	CustomerId string   `json:"customerId"`
+	PageSize   string   `json:"pageSize"`
+	StatusList []string `json:"statusList"`
+}
+
+type CrmCouponInfoReq struct {
+	ResourceCode string `json:"resourceCode"`
+	CustomerId   string `json:"customerId"`
+}
 type OrderQueryDetailReq struct {
 	OrderId string `json:"orderId"` // 	订单ID
 }
@@ -259,3 +345,47 @@ type StockQueryReq struct {
 type OrgQueryReq struct {
 	OrgType int `json:"orgType"` // 3门店，7 配送中心，10仓库
 }
+
+type BookQueryReq struct {
+	BusinessDate string `json:"businessDate"`
+}
+
+// type BookSaveReq struct{
+//    OrderNo string `json:"orderNo"`
+//    DinnerTime string `json:"innerTime"` // 预定时间
+//    TableNum int `json:"tableNum"`// 预定桌号
+//    DinersNum int `json:"inersNum"`// 预定时间
+//    CustomerName string `json:"customerName"` // 客户名称
+//    CustomerSex string `json:"customerSex"`
+//    CustomerPhone string `json:"customerPhone"`
+//    BusinessType string `json:"businessType"` // 业态
+//    DeviceType string `json:"deviceType"`
+//    DeviceId string `json:"deviceId"`
+//    SkipConflictFlag bool `json:"skipConflictFlag"` //是否跳过冲突校验
+
+//     "tableBookRecordDtoList": [
+//         {
+//             "areaId": "6e977c330831",
+//             "areaName": "雅座",
+//             "tableId": "e1c90b9a6cb4",
+//             "tableName": "桌台1"
+//         }
+//     ],
+//     "note": "备注",
+//     "outBizNo": "83b5a133d438",
+//     "sendMessageFlag": false,
+//     "bookingTimeType": "PERIOD_TIME",
+//     "periodTimeList": [
+//         {
+//             "periodId": "periodId_c62b8d890c06",
+//             "periodName": "periodName_e42bec8ca39f",
+//             "startTime": "yyyy-MM-dd HH:mm:ss",
+//             "endTime": "yyyy-MM-dd HH:mm:ss"
+//         }
+//     ],
+//     "operatorUserId": "87979",
+//     "operatorUserName": "张三",
+//     "bookingTypeName": "生日宴",
+//     "bookingTitle": "王哥的生日",
+//     "arrivalTime": "yyyy-mm-dd hh:mm"
+// }

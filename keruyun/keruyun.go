@@ -24,9 +24,20 @@ func RegisterSdk(cfg kry_model.SdkConfig) {
 	if cfg.PrintApiLogHandle != nil {
 		internalConfig.Global.PrintApiLogHandle = cfg.PrintApiLogHandle
 	}
+
+	if cfg.SetTokenForBrandIdHandle != nil {
+		internalConfig.Global.SetTokenForBrandIdHandle = cfg.SetTokenForBrandIdHandle
+	}
+	if cfg.GetTokenForBrandIdHandle != nil {
+		internalConfig.Global.GetTokenForBrandIdHandle = cfg.GetTokenForBrandIdHandle
+	}
 }
 
 // NewStandardAPI 创建智享版API
 func NewStandardAPI(shopId int64) (kry_standard.Api, error) {
 	return internalStandard.NewAPI(shopId)
+}
+
+func NewBrandIdAPI(brandId int64) (kry_standard.Api, error) {
+	return internalStandard.NewBrandAPI(brandId)
 }

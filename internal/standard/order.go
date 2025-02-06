@@ -13,3 +13,7 @@ func (s standardApi) OrderQueryDetail(req kry_standard.OrderQueryDetailReq) kry_
 func (s standardApi) OrderQueryList(req kry_standard.OrderQueryListReq) kry_model.Result[kry_standard.OrderListResp] {
 	return network.JsonToResult[kry_standard.OrderListResp](s.newPostJsonOptions(UriOrderQueryList, req))
 }
+
+func (s standardApi) BookQuery(req kry_standard.BookQueryReq) kry_model.Result[kry_standard.BookQueryResponse] {
+	return network.JsonToResult[kry_standard.BookQueryResponse](s.newPostJsonOptions(UriBookQuery, req))
+}

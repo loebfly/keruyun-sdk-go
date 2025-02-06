@@ -206,6 +206,19 @@ type CrmCreateResp struct {
 	MessageId  string `json:"messageId"`  // 服务消息ID
 }
 
+type CrmUpdateResp struct {
+	Code        int    `json:"code"`
+	Message     string `json:"message"`
+	MessageUuid string `json:"messageUuid"`
+	Result      struct {
+		CustomerId string `json:"customerId"`
+		Success    string `json:"success"`
+		BizMessage string `json:"bizMessage"`
+		ServerCode int    `json:"serverCode"`
+		MessageId  string `json:"messageId"`
+	} `json:"result"`
+}
+
 type CrmCustomerInfoResp struct {
 	Data struct {
 		Birthday   string `json:"birthday"`   // 生日日期,yyyy-MM-dd格式
@@ -222,6 +235,36 @@ type CrmCustomerInfoResp struct {
 	Success    bool   `json:"success"`    // 请求请求结果, true代表成功, false代表失败
 	ServerCode int    `json:"serverCode"` // 服务编码
 	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type CrmCustomerIdsResp struct {
+	List       []Customer `json:"list"`
+	Success    bool       `json:"success"`
+	BizMessage string     `json:"bizMessage"`
+	ServerCode string     `json:"serverCode"`
+	MessageId  string     `json:"messageId"`
+}
+
+type Customer struct {
+	Birthday   int64 `json:"birthday"`
+	Gender     int   `json:"gender"`
+	MemberTime int64 `json:"memberTime"`
+	LevelDTO   struct {
+		LevelId   string `json:"levelId"`
+		LevelNo   int    `json:"levelNo"`
+		LevelName string `json:"levelName"`
+	} `json:"levelDTO"`
+	Remark       string `json:"remark"`
+	CustomerType int    `json:"customerType"`
+	CustomerId   string `json:"customerId"`
+	State        int    `json:"state"`
+	Email        string `json:"email"`
+	CustomerTime int64  `json:"customerTime"`
+	Address      string `json:"address"`
+	Mobile       string `json:"mobile"`
+	Name         string `json:"name"`
+	Growth       string `json:"growth"`
+	Invoice      string `json:"invoice"`
 }
 
 type CrmCustomerPropertyResp struct {
@@ -286,6 +329,203 @@ type CrmDirectChargeResp struct {
 	} `json:"data"` // 业务数据
 	ServerCode int    `json:"serverCode"` // 服务编码
 	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type CrmTemplateListResp struct {
+	Result     []CouponTemplate `json:"result"`
+	TotalSize  int              `json:"totalSize"`
+	Success    bool             `json:"success"`
+	MsgInfo    string           `json:"msgInfo"`
+	MsgCode    string           `json:"msgCode"`
+	ServerCode int              `json:"serverCode"`
+	MessageId  string           `json:"messageId"`
+}
+
+// CouponTemplate 是 result 数组中的单个元素
+type CouponTemplate struct {
+	MinChargeType      string   `json:"minChargeType"`
+	UnavailableTime    string   `json:"unavailableTime"` // 这里是嵌套的JSON字符串
+	Inventory          int      `json:"inventory"`
+	Type               string   `json:"type"`
+	MinCharge          int      `json:"minCharge"`
+	AvailableTime      string   `json:"availableTime"` // 这里是嵌套的JSON字符串
+	EffectiveAfterDays string   `json:"effectiveAfterDays"`
+	ValidDayCount      int      `json:"validDayCount"`
+	StartTime          int64    `json:"startTime"`
+	Id                 string   `json:"id"`
+	UserLimit          int      `json:"userLimit"`
+	ShopCoverage       string   `json:"shopCoverage"`
+	ValidDateType      string   `json:"validDateType"`
+	ItemCoverage       string   `json:"itemCoverage"`
+	Instruction        string   `json:"instruction"`
+	UseChannels        []string `json:"useChannels"`
+	Name               string   `json:"name"`
+	EndTime            int64    `json:"endTime"`
+	Status             string   `json:"status"`
+}
+
+type CrmTemplateInfoResp struct {
+	Data       InfoCouponTemplate `json:"data"`
+	Success    bool               `json:"success"`
+	MsgInfo    string             `json:"msgInfo"`
+	MsgCode    string             `json:"msgCode"`
+	ServerCode int                `json:"serverCode"`
+	MessageId  string             `json:"messageId"`
+}
+
+type InfoCouponTemplate struct {
+	CouponTemplate
+	DiscountSetting struct {
+		Discount string `json:"discount"`
+	} `json:"discountSetting"`
+	GiftSetting struct {
+		ExchangeType string `json:"exchangeType"`
+		Type         int    `json:"type"`
+		Name         string `json:"name"`
+		Cost         int64  `json:"cost"` // 使用指针类型，因为JSON中可能为null
+	} `json:"giftSetting"`
+	BoughtGiftSetting struct {
+		ExchangeRuleType string `json:"exchangeRuleType"`
+		ItemBoughtNum    int    `json:"itemBoughtNum"`
+		ItemExchangeNum  int    `json:"itemExchangeNum"`
+		LimitDiscountNum int    `json:"limitDiscountNum"`
+	} `json:"boughtGiftSetting"`
+	ConditionDiscountSetting struct {
+		ItemBoughtNum    int    `json:"itemBoughtNum"`
+		Discount         int    `json:"discount"`
+		ExchangeItemType string `json:"exchangeItemType"`
+	} `json:"conditionDiscountSetting"`
+	CashSetting struct {
+		Denomination int `json:"denomination"`
+	} `json:"cashSetting"`
+}
+
+type CrmTemplateShopResp struct {
+	Result     []ShopInfo `json:"result"`
+	TotalSize  int        `json:"totalSize"`
+	MsgInfo    string     `json:"msgInfo"`
+	MsgCode    string     `json:"msgCode"`
+	ServerCode int        `json:"serverCode"`
+	MessageId  string     `json:"messageId"`
+	Success    bool       `json:"success"`
+}
+type ShopInfo struct {
+	ShopId string `json:"shopId"`
+}
+
+type CrmTemplateDishResp struct {
+	Result     []DishInfo `json:"result"`
+	TotalSize  int        `json:"totalSize"`
+	Success    bool       `json:"success"`
+	MsgInfo    string     `json:"msgInfo"`
+	MsgCode    string     `json:"msgCode"`
+	ServerCode int        `json:"serverCode"`
+	MessageId  string     `json:"messageId"`
+}
+
+type DishInfo struct {
+	ItemId        string `json:"itemId"`
+	ItemApplyType string `json:"itemApplyType"`
+	ItemType      string `json:"itemType"`
+	DishId        string `json:"dishId"`
+}
+
+type CrmCouponSendResp struct {
+	Data struct {
+		ResourceCode string `json:"resourceCode"`
+	} `json:"data"`
+	Success    bool   `json:"success"`
+	MsgInfo    string `json:"msgInfo"`
+	MsgCode    string `json:"msgCode"`
+	ServerCode int    `json:"serverCode"`
+	MessageId  string `json:"messageId"`
+}
+
+type CrmCouponInvalidResp struct {
+	Data struct {
+		Result bool `json:"result"`
+	} `json:"data"`
+	Success    bool   `json:"success"`
+	MsgInfo    string `json:"msgInfo"`
+	MsgCode    string `json:"msgCode"`
+	ServerCode int    `json:"serverCode"`
+	MessageId  string `json:"messageId"`
+}
+
+type CrmCouponQueryResp struct {
+	Result     []TemplateInfo `json:"result"`
+	TotalSize  int            `json:"totalSize"`
+	Success    bool           `json:"success"`
+	MsgInfo    string         `json:"msgInfo"`
+	MsgCode    string         `json:"msgCode"`
+	ServerCode int            `json:"serverCode"`
+	MessageId  string         `json:"messageId"`
+}
+
+type TemplateInfo struct {
+	TemplateType string `json:"templateType"`
+	ResourceCode string `json:"resourceCode"`
+	TemplateName string `json:"templateName"`
+	GmtCreated   int64  `json:"gmtCreated"`
+	StartTime    int64  `json:"startTime"`
+	EndTime      int64  `json:"endTime"`
+	TemplateId   string `json:"templateId"`
+	Status       string `json:"status"`
+}
+
+type CrmCouponInfoResp struct {
+	Data       Data   `json:"data"`
+	Success    bool   `json:"success"`
+	MsgInfo    string `json:"msgInfo"`
+	MsgCode    string `json:"msgCode"`
+	ServerCode int    `json:"serverCode"`
+	MessageId  string `json:"messageId"`
+}
+
+type Data struct {
+	ResourceCode    string          `json:"resourceCode"`
+	GmtCreated      int64           `json:"gmtCreated"`
+	StartTime       int64           `json:"startTime"`
+	VoucherTemplate VoucherTemplate `json:"voucherTemplate"`
+	EndTime         int64           `json:"endTime"`
+	Status          string          `json:"status"`
+}
+type VoucherTemplate struct {
+	MinChargeType   string   `json:"minChargeType"`
+	ItemCoverage    string   `json:"itemCoverage"`
+	Type            string   `json:"type"`
+	MinCharge       int      `json:"minCharge"`
+	AvailableTime   string   `json:"availableTime"` // 嵌套JSON字符串
+	Instruction     string   `json:"instruction"`
+	UseChannels     []string `json:"useChannels"`
+	Name            string   `json:"name"`
+	ID              string   `json:"id"`
+	Status          string   `json:"status"`
+	ShopCoverage    string   `json:"shopCoverage"`
+	DiscountSetting struct {
+		Discount string `json:"discount"`
+	} `json:"discountSetting"`
+	GiftSetting struct {
+		ExchangeType string  `json:"exchangeType"`
+		Type         int     `json:"type"`
+		Name         string  `json:"name"`
+		Cost         *string `json:"cost,omitempty"`
+	} `json:"giftSetting"`
+	BoughtGiftSetting struct {
+		ExchangeRuleType string `json:"exchangeRuleType"`
+		ItemBoughtNum    int    `json:"itemBoughtNum"`
+		ItemExchangeNum  int    `json:"itemExchangeNum"`
+		LimitDiscountNum int    `json:"limitDiscountNum"`
+	} `json:"boughtGiftSetting"`
+	ConditionDiscountSetting struct {
+		ItemBoughtNum    int    `json:"itemBoughtNum"`
+		Discount         int    `json:"discount"`
+		ExchangeItemType string `json:"exchangeItemType"`
+	} `json:"conditionDiscountSetting"`
+	CashSetting struct {
+		Denomination int `json:"denomination"`
+	} `json:"cashSetting"`
+	UnavailableTime string `json:"unavailableTime"` // 嵌套JSON字符串
 }
 
 type OrderDetailResp struct {
@@ -765,4 +1005,20 @@ type OrgQueryResp struct {
 	} `json:"data"` // 接口返回数据体
 	ServerCode int    `json:"serverCode"` // 服务编码
 	MessageId  string `json:"messageId"`  // 服务消息ID
+}
+
+type BookQueryResponse struct {
+	Code        int    `json:"code"`
+	Message     string `json:"message"`
+	MessageUuid string `json:"messageUuid"`
+	Result      struct {
+		Data []struct {
+			PeriodId   string `json:"periodId"`
+			PeriodName string `json:"periodName"`
+			StartTime  string `json:"startTime"`
+			EndTime    string `json:"endTime"`
+		} `json:"data"`
+		MessageId  string `json:"messageId"`
+		ServerCode int    `json:"serverCode"`
+	} `json:"result"`
 }

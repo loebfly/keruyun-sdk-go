@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"time"
+
 	"github.com/loebfly/keruyun-sdk-go/internal/config"
 	"github.com/loebfly/keruyun-sdk-go/internal/util"
 	"github.com/loebfly/keruyun-sdk-go/kry_model"
-	"net/http"
-	"time"
 )
 
 type HttpMethod string

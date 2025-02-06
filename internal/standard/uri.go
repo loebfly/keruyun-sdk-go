@@ -31,13 +31,32 @@ const (
 	*/
 	// UriCrmCreate 会员创建 POST
 	UriCrmCreate = "/open/standard/crm/CustomerOpenFacade/createCustomer"
+	// UriCrmCreate 会员创建 POST
+	UriCrmUpdate = "/open/standard/crm/CustomerOpenFacade/updateCustomer"
 	// UriCrmQueryByMobile 根据手机号查询会员 POST
 	UriCrmQueryByMobile = "/open/standard/crm/CustomerOpenFacade/queryByMobile"
+	// UriCrmQueryByMobile 根据手机号查询会员 POST
+	UriCrmQueryByIds = "/open/standard/crm/CustomerQueryFacade/queryByCustomerIds"
 	// UriCrmQueryProperty 会员资产查询 POST
 	UriCrmQueryProperty = "/open/standard/crm/CustomerOpenFacade/queryCustomerProperty"
 	// UriCrmDirectCharge 储值充值接口 POST
 	UriCrmDirectCharge = "/open/standard/crm/RechargeOpenFacade/directCharge"
-
+	// UriCrmTemplateList
+	UriCrmTemplateList = "/open/standard/crm/OpenVoucherTemplateQueryFacade/page"
+	// UriCrmTemplateInfo
+	UriCrmTemplateInfo = "/open/standard/crm/OpenVoucherTemplateQueryFacade/queryOne"
+	// UriCrmTemplateShop
+	UriCrmTemplateShopList = "/open/standard/crm/OpenVoucherTemplateShopQueryFacade/page"
+	// UriCrmTemplateDishList
+	UriCrmTemplateDishList = "/open/standard/crm/OpenVoucherTemplateItemQueryFacade/page"
+	// UriCrmCouponSend
+	UriCrmCouponSend = "/open/standard/crm/OpenVoucherInstanceOperateFacade/send"
+	//UriCrmCouponInvalid
+	UriCrmCouponInvalid = "/open/standard/crm/OpenVoucherInstanceOperateFacade/invalid"
+	// UriCrmCouponQuery
+	UriCrmCouponQueryList = "/open/standard/crm/OpenVoucherInstanceQueryFacade/page"
+	// UriCrmCouponQueryInfo
+	UriCrmCouponQueryInfo = "/open/standard/crm/OpenVoucherInstanceQueryFacade/queryOne"
 	/*
 		订单相关
 	*/
@@ -45,6 +64,8 @@ const (
 	UriOrderQueryDetail = "/open/standard/order/queryDetail"
 	// UriOrderQueryList 订单列表查询接口 POST
 	UriOrderQueryList = "/open/standard/order/queryList"
+
+	UriBookQuery = "/open/standard/book/queryShopBookPeriodTime"
 
 	/*
 		供应链2.0
@@ -93,4 +114,21 @@ const (
 	UriStockQuery = "/open/standard/stock/goods/findByCondition"
 	// UriOrgQuery 查询组织机构信息 POST
 	UriOrgQuery = "/open/standard/basic/supply/prodbase/orgInfoCommon/simple-info"
+
+	// /*
+	// 	数据报表
+	// */
+	// // UriBusinessIncomeList 店内营收统计 POST
+	// UriBusinessIncomeList = "/open/standard/report/business/income/v3/list"
+	// // UriBusinessIncomePromoList 优惠构成统计 POST
+	// UriBusinessIncomePromoList = "/open/standard/report/business/income/promo/v3/list"
+	// // UriBusinessIncomeConstituteList 收入构成统计
+	// UriBusinessIncomeConstituteList = "/open/standard/report/business/income/constitute/v3/list"
+	// // UriBusinessIncomePromoStatistics 收入优惠统计报表
+	// UriBusinessIncomePromoStatistics = "/open/standard/report/income/promo/statistics"
+	// // UripaidIncomeList 营业收款统计
+	// UripaidIncomeList = "/open/standard/report/paid/income/v6/list"
+	// // UripaymentReconciliationList 支付结算统计
+	// UripaymentReconciliationList = "/open/standard/report/payment/reconciliation/v4/list"
+	// // UriPaymethodStatistics 支付方式收款统计
 )
