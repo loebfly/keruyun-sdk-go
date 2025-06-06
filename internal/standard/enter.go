@@ -47,7 +47,7 @@ func (s standardApi) newBrandPostQuery() map[string]string {
 
 func (s standardApi) newPostJsonOptions(uri string, body any) network.JsonOptions {
 	query := s.newPostQuery()
-	if strings.Contains(uri, "crm") {
+	if strings.Contains(uri, "crm") || strings.Contains(uri, "income") {
 		query = s.newBrandPostQuery()
 	}
 	return network.JsonOptions{

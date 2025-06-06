@@ -124,11 +124,15 @@ type Api interface {
 		预定
 	*/
 	// BookQuery  获取预定营业日信息
-	BookQuery(req BookQueryReq) kry_model.Result[BookQueryResponse]
+	// BookQuery(req BookQueryReq) kry_model.Result[BookQueryResponse]
 	// 预定下单
 	// BookSave(req BookSaveReq) kry_model.Result[BookSaveResp]
 
 	/*
 		优惠券
 	*/
+	/*
+		统计
+	*/
+	BusinessIncomeList(req BusinessIncomeReq) kry_model.Result[BusinessIncomeResp]
 }

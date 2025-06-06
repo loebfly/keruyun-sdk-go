@@ -93,7 +93,7 @@ var TypeList = map[int]string{
 }
 
 var StatusList = map[int]string{
-	1: "UNUSED",      // 未使用
+	1: "UNUSED",       // 未使用
 	2: "USED",         // 使用中
 	3: "NO_INVENTORY", // 无库存
 	4: "INVALID",      // 已失效
@@ -350,42 +350,169 @@ type BookQueryReq struct {
 	BusinessDate string `json:"businessDate"`
 }
 
-// type BookSaveReq struct{
-//    OrderNo string `json:"orderNo"`
-//    DinnerTime string `json:"innerTime"` // 预定时间
-//    TableNum int `json:"tableNum"`// 预定桌号
-//    DinersNum int `json:"inersNum"`// 预定时间
-//    CustomerName string `json:"customerName"` // 客户名称
-//    CustomerSex string `json:"customerSex"`
-//    CustomerPhone string `json:"customerPhone"`
-//    BusinessType string `json:"businessType"` // 业态
-//    DeviceType string `json:"deviceType"`
-//    DeviceId string `json:"deviceId"`
-//    SkipConflictFlag bool `json:"skipConflictFlag"` //是否跳过冲突校验
+type BookSaveReq struct {
+	OrderNo                string `json:"orderNo"`
+	DinnerTime             string `json:"dinnerTime"`
+	TableNum               int    `json:"tableNum"`
+	DinersNum              int    `json:"dinersNum"`
+	CustomerName           string `json:"customerName"`
+	CustomerSex            string `json:"customerSex"`
+	CustomerPhone          string `json:"customerPhone"`
+	BusinessType           string `json:"businessType"`
+	DeviceType             string `json:"deviceType"`
+	DeviceId               string `json:"deviceId"`
+	SkipConflictFlag       bool   `json:"skipConflictFlag"`
+	TableBookRecordDtoList []struct {
+		AreaId    string `json:"areaId"`
+		AreaName  string `json:"areaName"`
+		TableId   string `json:"tableId"`
+		TableName string `json:"tableName"`
+	} `json:"tableBookRecordDtoList"`
+	Note                  string       `json:"note"`
+	OutBizNo              string       `json:"outBizNo"`
+	SendMessageFlag       bool         `json:"sendMessageFlag"`
+	BookingTimeType       string       `json:"bookingTimeType"`
+	PeriodTimeList        []PeriodTime `json:"periodTimeList"`
+	OperatorUserId        string       `json:"operatorUserId"`
+	OperatorUserName      string       `json:"operatorUserName"`
+	BookingTypeName       string       `json:"bookingTypeName"`
+	BookingTitle          string       `json:"bookingTitle"`
+	ArrivalTime           string       `json:"arrivalTime"`
+	ColdTableCount        int          `json:"coldTableCount"`
+	EmptyTableCount       int          `json:"emptyTableCount"`
+	FullTableCount        int          `json:"fullTableCount"`
+	DiningStandard        *string      `json:"diningStandard"`
+	CommissionStaffId     string       `json:"commissionStaffId"`
+	CommissionStaffName   string       `json:"commissionStaffName"`
+	CommissionStaffSource string       `json:"commissionStaffSource"`
+	CommissionStaffPhone  string       `json:"commissionStaffPhone"`
+	AddItemList           []struct {
+		DishType            string            `json:"dishType"`
+		SkuId               string            `json:"skuId"`
+		SellPrice           float64           `json:"sellPrice"`
+		DishNum             float64           `json:"dishNum"`
+		UnitId              string            `json:"unitId"`
+		UnitName            string            `json:"unitName"`
+		WeighFlag           string            `json:"weighFlag"`
+		CategoryId          string            `json:"categoryId"`
+		CookingWayGroupList []CookingWayGroup `json:"cookingWayGroupList"`
+		ComboGroupList      []struct {
+			ComboGroupId         string `json:"comboGroupId"`
+			ComboGroupDetailList []struct {
+				CookingWayGroupList []CookingWayGroup `json:"cookingWayGroupList"`
+				SideDishGroupList   []struct {
+					SideDishGroupId         string `json:"sideDishGroupId"`
+					SideDishGroupDetailList []struct {
+						SideDishId  int `json:"sideDishId"`
+						SideDishNum int `json:"sideDishNum"`
+					} `json:"sideDishGroupDetailList"`
+				} `json:"sideDishGroupList"`
+				SingleDishId   string  `json:"singleDishId"`
+				DishNum        int     `json:"dishNum"`
+				WeighFlag      string  `json:"weighFlag"`
+				DishName       string  `json:"dishName"`
+				SellPrice      float64 `json:"sellPrice"`
+				UnitId         string  `json:"unitId"`
+				UnitName       string  `json:"unitName"`
+				ItemCategoryId string  `json:"itemCategoryId"`
+			} `json:"comboGroupDetailList"`
+		} `json:"comboGroupList"`
+		SideDishGroupList []struct {
+			SideDishGroupId         string `json:"sideDishGroupId"`
+			SideDishGroupDetailList []struct {
+				SideDishId  int `json:"sideDishId"`
+				SideDishNum int `json:"sideDishNum"`
+			} `json:"sideDishGroupDetailList"`
+		} `json:"sideDishGroupList"`
+		CartItemNoteList []CartItemNote `json:"cartItemNoteList"`
+	} `json:"addItemList"`
+}
 
-//     "tableBookRecordDtoList": [
-//         {
-//             "areaId": "6e977c330831",
-//             "areaName": "雅座",
-//             "tableId": "e1c90b9a6cb4",
-//             "tableName": "桌台1"
-//         }
-//     ],
-//     "note": "备注",
-//     "outBizNo": "83b5a133d438",
-//     "sendMessageFlag": false,
-//     "bookingTimeType": "PERIOD_TIME",
-//     "periodTimeList": [
-//         {
-//             "periodId": "periodId_c62b8d890c06",
-//             "periodName": "periodName_e42bec8ca39f",
-//             "startTime": "yyyy-MM-dd HH:mm:ss",
-//             "endTime": "yyyy-MM-dd HH:mm:ss"
-//         }
-//     ],
-//     "operatorUserId": "87979",
-//     "operatorUserName": "张三",
-//     "bookingTypeName": "生日宴",
-//     "bookingTitle": "王哥的生日",
-//     "arrivalTime": "yyyy-mm-dd hh:mm"
-// }
+// PeriodTime 结构体
+type PeriodTime struct {
+	PeriodId   string `json:"periodId"`
+	PeriodName string `json:"periodName"`
+	StartTime  string `json:"startTime"`
+	EndTime    string `json:"endTime"`
+}
+
+// CookingWayGroup 结构体
+type CookingWayGroup struct {
+	CookingWayGroupId string `json:"cookingWayGroupId"`
+	CookingWayList    []struct {
+		CookingWayId string `json:"cookingWayId"`
+	} `json:"cookingWayList"`
+}
+
+// CartItemNote 结构体
+type CartItemNote struct {
+}
+
+type BookQueryPeriodTimeReq struct {
+	BusinessDate string `json:"businessDate"` // 格式  2025-12-12
+}
+
+type BookQueryOrderReq struct {
+	BookOrderNo      string `json:"bookOrderNo"`
+	OperatorUserId   string `json:"operatorUserId"`
+	OperatorUserName string `json:"operatorUserName"`
+}
+
+type BookQueryTableInfoReq struct {
+	PageNum  int `json:"pageNum"`
+	PageSize int `json:"pageSize"`
+}
+
+type BookConfirmReq struct {
+	OrderNo          string `json:"OrderNo"`
+	OperatorUserId   string `json:"operatorUserId"`
+	OperatorUserName string `json:"operatorUserName"`
+}
+
+type BookCancelReq struct {
+	OrderNo                      string `json:"orderNo"`
+	ShopBookOrderCancelReasonDto struct {
+		ReasonContent string `json:"reasonContent"`
+	} `json:"shopBookOrderCancelReasonDto"`
+	SendMessageFlag  bool   `json:"sendMessageFlag"`
+	OperatorUserId   string `json:"operatorUserId"`
+	OperatorUserName string `json:"operatorUserName"`
+}
+
+type BusinessIncomeReq struct {
+	StatisticsByShop      bool     `json:"statisticsByShop"`
+	OrgStatisticsType     string   `json:"orgStatisticsType"`
+	CouponStatisticalType string   `json:"couponStatisticalType"`
+	StoreStatisticalType  string   `json:"storeStatisticalType"`
+	PeriodType            string   `json:"periodType"`
+	OrderSourceList       []string `json:"orderSourceList"`
+	OrderTypeList         []string `json:"orderTypeList"`
+	DateRange             struct {
+		DateType  string `json:"dateType"`
+		StartDate int64  `json:"startDate"`
+		EndDate   int64  `json:"endDate"`
+	} `json:"dateRange"`
+	PageBean struct {
+		PageNum  int `json:"pageNum"`
+		PageSize int `json:"pageSize"`
+	} `json:"pageBean"`
+	ShopIds   []int  `json:"shopIds"`
+	RequestId string `json:"requestId"`
+}
+
+type BusinessIncomePromoStatisticsReq struct {
+	DateRange struct {
+		DateType  string `json:"dateType"`
+		StartDate int64  `json:"startDate"`
+		EndDate   int64  `json:"endDate"`
+	} `json:"dateRange"`
+	OrderSources []string `json:"orderSources"`
+	OrderTypes   []string `json:"orderTypes"`
+	PromoTypes   []string `json:"promoTypes"`
+	PromoName    string   `json:"promoName"`
+	PageBean     struct {
+		PageNum  int `json:"pageNum"`
+		PageSize int `json:"pageSize"`
+	} `json:"pageBean"`
+	ShopIds []int `json:"shopIds"`
+}

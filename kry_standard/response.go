@@ -1008,17 +1008,283 @@ type OrgQueryResp struct {
 }
 
 type BookQueryResponse struct {
+	Data []struct {
+		PeriodId   string `json:"periodId"`
+		PeriodName string `json:"periodName"`
+		StartTime  string `json:"startTime"`
+		EndTime    string `json:"endTime"`
+	} `json:"data"`
+	MessageId  string `json:"messageId"`
+	ServerCode int    `json:"serverCode"`
+}
+
+type BookSaveResp struct {
 	Code        int    `json:"code"`
 	Message     string `json:"message"`
 	MessageUuid string `json:"messageUuid"`
 	Result      struct {
-		Data []struct {
-			PeriodId   string `json:"periodId"`
-			PeriodName string `json:"periodName"`
-			StartTime  string `json:"startTime"`
-			EndTime    string `json:"endTime"`
-		} `json:"data"`
-		MessageId  string `json:"messageId"`
-		ServerCode int    `json:"serverCode"`
+		BookOrderNo string `json:"bookOrderNo"`
+		ReqId       string `json:"reqId"`
+		Code        string `json:"code"`
+		Msg         string `json:"msg"`
+		Success     string `json:"success"`
+		MsgCode     string `json:"msgCode"`
+		MsgInfo     string `json:"msgInfo"`
+		MessageId   string `json:"messageId"`
+		ServerCode  int    `json:"serverCode"`
 	} `json:"result"`
+}
+
+type BookQueryPeriodTimeResp struct {
+	Data []struct {
+		PeriodId   string `json:"periodId"`
+		PeriodName string `json:"periodName"`
+		StartTime  string `json:"startTime"`
+		EndTime    string `json:"endTime"`
+	} `json:"data"`
+	MessageId  string `json:"messageId"`
+	ServerCode int    `json:"serverCode"`
+}
+
+type BookQueryOrderResp struct {
+	MessageId      string `json:"messageId"`
+	CreateId       string `json:"createId"`
+	CreatorName    string `json:"creatorName"`
+	UpdateId       string `json:"updateId"`
+	UpdateName     string `json:"updateName"`
+	OrderNo        string `json:"orderNo"`
+	DinnerTime     string `json:"dinnerTime"`
+	TableNum       int    `json:"tableNum"`
+	DinerNum       int    `json:"dinerNum"`
+	CustomerName   string `json:"customerName"`
+	CustomerSex    string `json:"customerSex"`
+	CustomerPhone  string `json:"customerPhone"`
+	OutBizNo       string `json:"outBizNo"`
+	BusinessType   string `json:"businessType"`
+	Note           string `json:"note"`
+	Status         string `json:"status"`
+	BookingCnt     int    `json:"bookingCnt"`
+	CancelCnt      int    `json:"cancelCnt"`
+	OverdueCnt     int    `json:"overdueCnt"`
+	GmtCreate      string `json:"gmtCreate"`
+	Source         string `json:"source"`
+	SourceName     string `json:"sourceName"`
+	PeriodTimeList []struct {
+		PeriodId   string `json:"periodId"`
+		PeriodName string `json:"periodName"`
+		StartTime  string `json:"startTime"`
+		EndTime    string `json:"endTime"`
+	} `json:"periodTimeList"`
+	CancelReasonDto struct {
+		Id            string `json:"id"`
+		ReasonContent string `json:"reasonContent"`
+	} `json:"cancelReasonDto"`
+	OpenInfoDto struct {
+		OpenSourceId   string `json:"openSourceId"`
+		OpenSourceName string `json:"openSourceName"`
+	} `json:"openInfoDto"`
+	TableRecordList []struct {
+		AreaId          string `json:"areaId"`
+		AreaName        string `json:"areaName"`
+		TableId         string `json:"tableId"`
+		TableName       string `json:"tableName"`
+		DinnerTime      string `json:"dinnerTime"`
+		Status          string `json:"status"`
+		BookingTimeType string `json:"bookingTimeType"`
+		PeriodTimeList  []any  `json:"periodTimeList"`
+	} `json:"tableRecordList"`
+	CancelTime      string `json:"cancelTime"`
+	BookingTimeType string `json:"bookingTimeType"`
+	ServerCode      int    `json:"serverCode"`
+}
+
+type BookTbaleInfoResp struct {
+	PageNum   int `json:"pageNum"`
+	PageSize  int `json:"pageSize"`
+	TotalNum  int `json:"totalNum"`
+	TotalPage int `json:"totalPage"`
+	PageList  []struct {
+		TableId        string `json:"tableId"`
+		TableName      string `json:"tableName"`
+		AreaId         string `json:"areaId"`
+		AreaName       string `json:"areaName"`
+		TableStatus    string `json:"tableStatus"`
+		DinersNum      int    `json:"dinersNum"`
+		TableNum       int    `json:"tableNum"`
+		OpenTime       string `json:"openTime"`
+		Sort           int    `json:"sort"`
+		TableNameIndex string `json:"tableNameIndex"`
+		DiningFlag     bool   `json:"diningFlag"`
+		TableTypeCode  string `json:"tableTypeCode"`
+	} `json:"pageList"`
+	MessageId  string `json:"messageId"`
+	ServerCode int    `json:"serverCode"`
+}
+
+type BookConfirmResp struct {
+	ReqId      string `json:"reqId"`
+	Data       bool   `json:"data"`
+	Code       string `json:"code"`
+	Msg        string `json:"msg"`
+	Success    string `json:"success"`
+	MsgCode    string `json:"msgCode"`
+	MsgInfo    string `json:"msgInfo"`
+	MessageId  string `json:"messageId"`
+	ServerCode int    `json:"serverCode"`
+}
+
+type BookCancelResp struct {
+	ReqId      string `json:"reqId"`
+	Data       bool   `json:"data"`
+	Code       string `json:"code"`
+	Msg        string `json:"msg"`
+	Success    string `json:"success"`
+	MsgCode    string `json:"msgCode"`
+	MsgInfo    string `json:"msgInfo"`
+	MessageId  string `json:"messageId"`
+	ServerCode int    `json:"serverCode"`
+}
+
+type BusinessIncomePromoResp struct {
+	Data struct {
+		TotalSize int `json:"totalSize"`
+		List      []struct {
+			BrandId             int    `json:"brandId"`
+			ShopName            string `json:"shopName"`
+			ShopId              int    `json:"shopId"`
+			AddressProvince     string `json:"addressProvince"`
+			AddressProvinceName string `json:"addressProvinceName"`
+			AddressCity         string `json:"addressCity"`
+			AddressCityName     string `json:"addressCityName"`
+			AddressArea         string `json:"addressArea"`
+			AddressAreaName     string `json:"addressAreaName"`
+			Date                string `json:"date"`
+			OrderPromoItems     struct {
+				ItemList []PromoItem `json:"itemList"`
+				SubTotal string      `json:"subTotal"`
+			} `json:"orderPromoItems"`
+			PaymentPromoItems struct {
+				ItemList []PromoItem `json:"itemList"`
+				SubTotal string      `json:"subTotal"`
+			} `json:"paymentPromoItems"`
+			OrderExpenseItems struct {
+				ItemList []PromoItem `json:"itemList"`
+				SubTotal string      `json:"subTotal"`
+			} `json:"orderExpenseItems"`
+		} `json:"list"`
+	} `json:"data"`
+	Success bool   `json:"success"`
+	MsgCode string `json:"msgCode"`
+	MsgInfo string `json:"msgInfo"`
+}
+
+type PromoItem struct {
+	Code       string      `json:"code"`
+	Name       string      `json:"name"`
+	Amount     string      `json:"amount"`
+	TextVal    string      `json:"textVal"`
+	DefaultVal string      `json:"defaultVal"`
+	ItemList   []PromoItem `json:"itemList"`
+}
+
+type BusinessIncomeResp struct {
+	Data struct {
+		TotalSize int `json:"totalSize"`
+		List      []struct {
+			BrandId                     int    `json:"brandId"`
+			ShopName                    string `json:"shopName"`
+			ShopId                      int    `json:"shopId"`
+			AddressProvince             string `json:"addressProvince"`
+			AddressProvinceName         string `json:"addressProvinceName"`
+			AddressCity                 string `json:"addressCity"`
+			AddressCityName             string `json:"addressCityName"`
+			AddressArea                 string `json:"addressArea"`
+			AddressAreaName             string `json:"addressAreaName"`
+			Date                        string `json:"date"`
+			SaleAmt                     string `json:"saleAmt"`
+			TotalPromoAmt               string `json:"totalPromoAmt"`
+			PromoAmtProportion          string `json:"promoAmtProportion"`
+			BusinessIncomeAmt           string `json:"businessIncomeAmt"`
+			ItemActualReceivedAmt       string `json:"itemActualReceivedAmt"`
+			ExtraFeeActualAmt           string `json:"extraFeeActualAmt"`
+			OrderCnt                    int    `json:"orderCnt"`
+			AvgTradeAmtPreDiscount      string `json:"avgTradeAmtPreDiscount"`
+			AvgTradeAmtAfterDiscount    string `json:"avgTradeAmtAfterDiscount"`
+			OrderPeopleCnt              int    `json:"orderPeopleCnt"`
+			AvgCustomerAmtPreDiscount   string `json:"avgCustomerAmtPreDiscount"`
+			AvgCustomerAmtAfterDiscount string `json:"avgCustomerAmtAfterDiscount"`
+			AvgDiningDuration           string `json:"avgDiningDuration"`
+			OpenTableCnt                int    `json:"openTableCnt"`
+			OpenTableRate               string `json:"openTableRate"`
+			ReopenTableRate             string `json:"reopenTableRate"`
+			OrderTypeItems              struct {
+				ItemList []OrderTypeItem `json:"itemList"`
+				SubTotal string          `json:"subTotal"`
+			} `json:"orderTypeItems"`
+		} `json:"list"`
+	} `json:"data"`
+}
+
+// 定义 OrderTypeItem 结构体
+type OrderTypeItem struct {
+	Code       string          `json:"code"`
+	Name       string          `json:"name"`
+	Amount     string          `json:"amount"`
+	TextVal    string          `json:"textVal"`
+	DefaultVal string          `json:"defaultVal"`
+	ItemList   []OrderTypeItem `json:"itemList"`
+}
+
+type BusinessIncomePromoStatisticsResp struct {
+	Data struct {
+		Values []struct {
+			FinishBusiDate     string `json:"finishBusiDate"`
+			PromoName          string `json:"promoName"`
+			PromoSecType       string `json:"promoSecType"`
+			PromoSecTypeName   string `json:"promoSecTypeName"`
+			PromoThirdTypeName string `json:"promoThirdTypeName"`
+			PromoType          string `json:"promoType"`
+			PromoTypeName      string `json:"promoTypeName"`
+			PromoAmt           string `json:"promoAmt"`
+		} `json:"values"`
+		TotalSize int `json:"totalSize"`
+	} `json:"data"`
+	Success bool   `json:"success"`
+	MsgCode string `json:"msgCode"`
+	MsgInfo string `json:"msgInfo"`
+}
+
+type BusinessIncomeConstituteResp struct {
+	Data struct {
+		TotalSize int `json:"totalSize"`
+		List      []struct {
+			BrandId             int    `json:"brandId"`
+			ShopName            string `json:"shopName"`
+			ShopId              int    `json:"shopId"`
+			AddressProvince     string `json:"addressProvince"`
+			AddressProvinceName string `json:"addressProvinceName"`
+			AddressCity         string `json:"addressCity"`
+			AddressCityName     string `json:"addressCityName"`
+			AddressArea         string `json:"addressArea"`
+			AddressAreaName     string `json:"addressAreaName"`
+			Date                string `json:"date"`
+			BusinessIncomeItems struct {
+				ItemList []BusinessIncomeItem `json:"itemList"`
+				SubTotal string               `json:"subTotal"`
+			} `json:"businessIncomeItems"`
+		} `json:"list"`
+	} `json:"data"`
+	Success bool   `json:"success"`
+	MsgCode string `json:"msgCode"`
+	MsgInfo string `json:"msgInfo"`
+}
+
+// 定义 BusinessIncomeItem 结构体
+type BusinessIncomeItem struct {
+	Code       string               `json:"code"`
+	Name       string               `json:"name"`
+	Amount     string               `json:"amount"`
+	TextVal    string               `json:"textVal"`
+	DefaultVal string               `json:"defaultVal"`
+	ItemList   []BusinessIncomeItem `json:"itemList"`
 }

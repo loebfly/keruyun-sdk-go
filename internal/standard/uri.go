@@ -65,8 +65,6 @@ const (
 	// UriOrderQueryList 订单列表查询接口 POST
 	UriOrderQueryList = "/open/standard/order/queryList"
 
-	UriBookQuery = "/open/standard/book/queryShopBookPeriodTime"
-
 	/*
 		供应链2.0
 	*/
@@ -115,20 +113,36 @@ const (
 	// UriOrgQuery 查询组织机构信息 POST
 	UriOrgQuery = "/open/standard/basic/supply/prodbase/orgInfoCommon/simple-info"
 
+	/*
+		预定的
+	*/
+	// UriBookSave 预定单保存 POST
+	UriBookSave = "/open/standard/book/save"
+	// UriBookQueryShopBookPeriodTime 获取预订营业日信息 POST
+	UriBookQueryShopBookPeriodTime = "/open/standard/book/queryShopBookPeriodTime"
+	// UriBookQuery 预订单详情查询 POST
+	UriBookQuery = "/open/standard/book/queryBookOrderDetailByOrderNo"
+	// UriBookQueryBookTableInfo 查询桌台信息与预订单聚合信息 POST
+	UriBookQueryBookTableInfo = "/open/standard/book/queryBookingTableInfo"
+	// UriBookConfirm 预订到店 POST
+	UriBookConfirm = "/open/standard/book/confirmArrival"
+	// UriBookCancel 取消预订 POST
+	UriBookCancel = "/open/standard/book/cancel"
+
 	// /*
 	// 	数据报表
 	// */
-	// // UriBusinessIncomeList 店内营收统计 POST
-	// UriBusinessIncomeList = "/open/standard/report/business/income/v3/list"
-	// // UriBusinessIncomePromoList 优惠构成统计 POST
-	// UriBusinessIncomePromoList = "/open/standard/report/business/income/promo/v3/list"
-	// // UriBusinessIncomeConstituteList 收入构成统计
-	// UriBusinessIncomeConstituteList = "/open/standard/report/business/income/constitute/v3/list"
-	// // UriBusinessIncomePromoStatistics 收入优惠统计报表
-	// UriBusinessIncomePromoStatistics = "/open/standard/report/income/promo/statistics"
-	// // UripaidIncomeList 营业收款统计
-	// UripaidIncomeList = "/open/standard/report/paid/income/v6/list"
-	// // UripaymentReconciliationList 支付结算统计
-	// UripaymentReconciliationList = "/open/standard/report/payment/reconciliation/v4/list"
-	// // UriPaymethodStatistics 支付方式收款统计
+	// UriBusinessIncomePromoList 优惠构成统计 POST
+	UriBusinessIncomePromoList = "/open/standard/report/business/income/promo/v3/list"
+	// UriBusinessIncomeList 店内营收统计 POST
+	UriBusinessIncomeList = "/open/standard/report/business/income/v3/list"
+	// UriBusinessIncomePromoStatistics 收入优惠统计报表
+	UriBusinessIncomePromoStatistics = "/open/standard/report/income/promo/statistics"
+	// UriBusinessIncomeConstituteList 收入构成统计
+	UriBusinessIncomeConstituteList = "/open/standard/report/business/income/constitute/v3/list"
+	// UriPaidIncomeList 营业收款统计
+	UriPaidIncomeList = "/open/standard/report/paid/income/v6/list"
+	// UriPaymentReconciliationList 支付结算统计
+	UriPaymentReconciliationList = "/open/standard/report/payment/reconciliation/v4/list"
+	// UriPaymethodStatistics 支付方式收款统计
 )
