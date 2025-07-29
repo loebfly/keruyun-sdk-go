@@ -347,7 +347,7 @@ type OrgQueryReq struct {
 }
 
 type BookQueryReq struct {
-	BusinessDate string `json:"businessDate"`
+	BookOrderNo string `json:"bookOrderNo"`
 }
 
 type BookSaveReq struct {
@@ -515,4 +515,15 @@ type BusinessIncomePromoStatisticsReq struct {
 		PageSize int `json:"pageSize"`
 	} `json:"pageBean"`
 	ShopIds []int `json:"shopIds"`
+}
+
+type KposlocalReq struct {
+	RequestId     string         `json:"requestId"`
+	RequestHeader map[string]any `json:"requestHeader"`
+	RequestBody   struct {
+		OrderId        string `json:"orderId"`
+		BusinessFormat string `json:"businessFormat"`
+		SceneCode      string `json:"sceneCode"`
+		CartId         string `json:"cartId"`
+	} `json:"requestBody"`
 }

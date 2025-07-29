@@ -65,6 +65,8 @@ const (
 	// UriOrderQueryList 订单列表查询接口 POST
 	UriOrderQueryList = "/open/standard/order/queryList"
 
+	UriKposLocalOrderDetail = "/open/standard/kposlocal/K003004"
+
 	/*
 		供应链2.0
 	*/

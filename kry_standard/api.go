@@ -71,6 +71,8 @@ type Api interface {
 	// OrderQueryList 订单列表查询接口
 	OrderQueryList(req OrderQueryListReq) kry_model.Result[OrderListResp]
 
+	QueryKposLocal(req KposlocalReq) kry_model.Result[KposLocalResp]
+
 	/*
 		供应链2.0
 	*/
@@ -123,11 +125,12 @@ type Api interface {
 	/*
 		预定
 	*/
-	// BookQuery  获取预定营业日信息
-	// BookQuery(req BookQueryReq) kry_model.Result[BookQueryResponse]
-	// 预定下单
-	// BookSave(req BookSaveReq) kry_model.Result[BookSaveResp]
-
+	BookSave(req BookSaveReq) kry_model.Result[BookSaveResp]
+	BookQueryShopBookPeriodTime(req BookQueryPeriodTimeReq) kry_model.Result[BookQueryPeriodTimeResp]
+	BookQueryOrderInfo(req BookQueryOrderReq) kry_model.Result[BookQueryOrderResp]
+	BookQueryTableInfo(req BookQueryTableInfoReq) kry_model.Result[BookTbaleInfoResp]
+	BookConfirm(req BookConfirmReq) kry_model.Result[BookConfirmResp]
+	BookCancel(req BookCancelReq) kry_model.Result[BookCancelResp]
 	/*
 		优惠券
 	*/

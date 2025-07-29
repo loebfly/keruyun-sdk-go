@@ -6,7 +6,7 @@ import (
 	"github.com/loebfly/keruyun-sdk-go/kry_standard"
 )
 
-func (s standardApi) BookSave(req kry_standard.BookQueryReq) kry_model.Result[kry_standard.BookSaveResp] {
+func (s standardApi) BookSave(req kry_standard.BookSaveReq) kry_model.Result[kry_standard.BookSaveResp] {
 	return network.JsonToResult[kry_standard.BookSaveResp](s.newPostJsonOptions(UriBookSave, req))
 }
 
