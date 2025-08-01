@@ -168,10 +168,10 @@ type DishDetailResp struct {
 		SpicyLevel        int      `json:"spicyLevel"`       //辣度等级
 		Sort              int      `json:"sort"`             //排序值
 		DishStockInfoList []struct {
-			DishId          string `json:"dishId"`          //菜品SPU ID
-			SkuId           string `json:"skuId"`           //菜品SKU ID
-			ResidualDecimal int64  `json:"residualDecimal"` //剩余售卖量
-			SoldOutFlag     string `json:"soldOutFlag"`     //是否售罄（Y：售罄，N：未售罄）
+			DishId          string  `json:"dishId"`          //菜品SPU ID
+			SkuId           string  `json:"skuId"`           //菜品SKU ID
+			ResidualDecimal float64 `json:"residualDecimal"` //剩余售卖量
+			SoldOutFlag     string  `json:"soldOutFlag"`     //是否售罄（Y：售罄，N：未售罄）
 		} `json:"dishStockInfoList"` //菜品库存信息列表
 		UnitId string `json:"unitId"` //菜品单位ID
 	} `json:"value"` //业务数据

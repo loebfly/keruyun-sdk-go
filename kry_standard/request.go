@@ -35,11 +35,11 @@ type DishQueryCategoryReq struct {
 }
 
 type CrmCreateReq struct {
-	Gender   int    `json:"gender"`   // 性别,0女1男2其它
-	Mobile   string `json:"mobile"`   // 手机号,11位
-	Name     string `json:"name"`     // 姓名
-	ShopId   string `json:"shopId"`   // 入会门店id
-	Birthday string `json:"birthday"` // 生日日期,yyyy-MM-dd格式
+	Gender   int    `json:"gender"`             // 性别,0女1男2其它
+	Mobile   string `json:"mobile"`             // 手机号,11位
+	Name     string `json:"name"`               // 姓名
+	ShopId   string `json:"shopId"`             // 入会门店id
+	Birthday string `json:"birthday,omitempty"` // 生日日期,yyyy-MM-dd格式
 }
 
 type CrmUpdateReq struct {
