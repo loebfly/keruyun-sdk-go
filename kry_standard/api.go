@@ -71,7 +71,9 @@ type Api interface {
 	// OrderQueryList 订单列表查询接口
 	OrderQueryList(req OrderQueryListReq) kry_model.Result[OrderListResp]
 
-	QueryKposLocal(req KposlocalReq) kry_model.Result[KposLocalResp]
+	QueryKposLocal(req KposlocalReq) kry_model.Result[KposlocalAddResp]
+	QueryKposLocalAdd(req KposlocalAddReq) kry_model.Result[KposlocalAddResp]
+	QueryTableStatus(req KposTableStatusQueryReq) kry_model.Result[TableStatusResp]
 
 	/*
 		供应链2.0

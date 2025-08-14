@@ -527,3 +527,112 @@ type KposlocalReq struct {
 		CartId         string `json:"cartId"`
 	} `json:"requestBody"`
 }
+
+type KposlocalAddReq struct {
+	RequestId     string         `json:"requestId"`
+	RequestHeader map[string]any `json:"requestHeader"`
+	RequestBody   struct {
+		OrderId               string           `json:"orderId"`
+		BusinessFormat        string           `json:"businessFormat"`
+		SceneCode             string           `json:"sceneCode"`
+		GoodList              []AddItemRequest `json:"goodList"`
+		OperateItemSourceType string           `json:"operateItemSourceType,omitempty"`
+	} `json:"requestBody"`
+}
+
+type AddItemRequest struct {
+	SceneCode               string                `json:"sceneCode,omitempty"`
+	SkuId                   string                `json:"skuId"`
+	SpuId                   string                `json:"SpuId"`
+	TemporaryDishFlag       string                `json:"temporaryDishFlag,omitempty"`
+	MustOrderFlag           string                `json:"mustOrderFlag,omitempty"`
+	ItemName                string                `json:"itemName,omitempty"`
+	ItemType                string                `json:"itemType,omitempty"`
+	ItemExtType             string                `json:"itemExtType,omitempty"`
+	TicketExitIdList        []string              `json:"ticketExitIdList,omitempty"`
+	ItemPriceStr            string                `json:"itemPriceStr,omitempty"`
+	ItemNumStr              float64               `json:"itemNumStr,omitempty"`
+	WeighDishFlag           string                `json:"weighDishFlag,omitempty"`
+	UnitId                  string                `json:"unitId,omitempty"`
+	UnitName                string                `json:"unitName,omitempty"`
+	SecondUnitId            string                `json:"secondUnitId,omitempty"`
+	SecondUnitName          string                `json:"secondUnitName,omitempty"`
+	Weigh                   float64               `json:"weigh,omitempty"`
+	RequisiteCookMethodFlag string                `json:"requisiteCookMethodFlag,omitempty"`
+	RequisiteSideDishFlag   string                `json:"requisiteSideDishFlag,omitempty"`
+	CookAttachGroupList     []CookAttachGroup     `json:"cookAttachGroupList,omitempty"`
+	AddSpiceAttachGroupList []AddSpiceAttachGroup `json:"addSpiceAttachGroupList,omitempty"`
+	ComboGroupList          []ComboGroup          `json:"comboGroupList,omitempty"`
+	OrderUnitId             string                `json:"orderUnitId,omitempty"`
+	OrderUnitName           string                `json:"orderUnitName,omitempty"`
+	OrderUnitNum            float64               `json:"orderUnitNum,omitempty"`
+	DoubleUnitWeighDishFlag string                `json:"doubleUnitWeighDishFlag,omitempty"`
+	CartItemNoteList        []string              `json:"cartItemNoteList,omitempty"`
+	CartItemId              string                `json:"cartItemId,omitempty"`
+	ChangePriceFlag         string                `json:"changePriceFlag,omitempty"`
+	WaitCallFlag            string                `json:"waitCallFlag,omitempty"`
+	PriceType               string                `json:"priceType,omitempty"`
+	CookbookId              string                `json:"cookbookId,omitempty"`
+	CookbookType            string                `json:"cookbookType,omitempty"`
+	MealNum                 float64               `json:"mealNum,omitempty"`
+	SinglePackFlag          string                `json:"singlePackFlag,omitempty"`
+	ItemNoCard              string                `json:"itemNoCard,omitempty"`
+}
+
+type CookAttachGroup struct {
+	CookAttachGroupId string       `json:"cookAttachGroupId"`
+	CookAttachIdList  []CookAttach `json:"cookAttachIdList"`
+}
+
+type CookAttach struct {
+	CookAttachId  string `json:"cookAttachId"`
+	TemporaryFlag string `json:"temporaryFlag"`
+}
+
+type AddSpiceAttachGroup struct {
+	AddSpiceGroupId    string           `json:"addSpiceGroupId"`
+	AddSpiceAttachList []AddSpiceAttach `json:"addSpiceAttachList"`
+}
+type AddSpiceAttach struct {
+	ChildSkuId  string `json:"childSkuId"`
+	ChildNumStr string `json:"childNumStr"`
+}
+
+type ComboGroup struct {
+	ComboGroupId string       `json:"comboGroupId"`
+	ChildSkuList []ComboChild `json:"childSkuList"`
+}
+
+type ComboChild struct {
+	CartItemId                   string                `json:"cartItemId"`
+	ChildWeighFlag               string                `json:"childWeighFlag"`
+	ChildWeighItemPrice          string                `json:"childWeighItemPrice,omitempty"`
+	RequisiteCookMethodFlag      string                `json:"requisiteCookMethodFlag"`
+	ChildSkuId                   string                `json:"childSkuId"`
+	ChildNumStr                  float64               `json:"childNumStr"`
+	CartItemNoteList             []string              `json:"cartItemNoteList"`
+	CookAttachGroupList          []CookAttachGroup     `json:"cookAttachGroupList"`
+	AddSpiceAttachGroups         []AddSpiceAttachGroup `json:"addSpiceAttachGroups"`
+	AlternativeSkuId             string                `josn:"alternativeSkuId,omitempty"`
+	ChildOrderUnitNumStr         float64               `json:"childOrderUnitNumStr,omitempty"`
+	ChildDoubleUnitWeighDishFlag string                `json:"childDoubleUnitWeighDishFlag"`
+	RequisiteSideDishFlag        string                `json:"requisiteSideDishFlag"`
+	SinglePackFlag               string                `json:"singlePackFlag"`
+	WaitCallFlag                 string                `json:"waitCallFlag"`
+	TemporaryDishFlag            string                `json:"temporaryDishFlag,omitempty"`
+	ItemName                     string                `json:"itemName,omitempty"`
+	TicketExitIdList             []string              `json:"ticketExitIdList"`
+	ItemPriceStr                 string                `json:"itemPriceStr,omitempty"`
+	ItemNumStr                   float64               `json:"itemNumStr,omitempty"`
+	WeighDishFlag                string                `json:"weighDishFlag,omitempty"`
+	UnitId                       string                `json:"unitId,omitempty"`
+	UnitName                     string                `json:"unitName,omitempty"`
+	SecondUnitId                 string                `json:"secondUnitId,omitempty"`
+	SecondUnitName               string                `json:"secondUnitName,omitempty"`
+	Weigh                        float64               `json:"weigh,omitempty"`
+}
+
+type KposTableStatusQueryReq struct {
+	PullPosFlag bool   `json:"pullPosFlag"`
+	TableId     string `json:"tableId"`
+}
