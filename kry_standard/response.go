@@ -1603,51 +1603,51 @@ type KposlocalAddResp struct {
 				OrderNo       string `json:"orderNo"`
 				OrderId       string `json:"orderId"`
 				OrderItemList []struct {
-					ItemOriginGroupFee    float64 `json:"itemOriginGroupFee"`
-					ItemType              string  `json:"itemType"`
-					ItemNumStr            string  `json:"itemNumStr"`
-					MustOrderFlag         string  `json:"mustOrderFlag"`
-					OrderId               string  `json:"orderId"`
-					OrderAddSpiceList     []any   `json:"orderAddSpiceList"`
-					ItemCategoryId        string  `json:"itemCategoryId"`
-					BatchId               string  `json:"batchId"`
-					BoolChangePrice       string  `json:"boolChangePrice"`
-					AbolishRefundFlag     string  `json:"abolishRefundFlag"`
-					GiveFlag              string  `json:"giveFlag"`
-					TotalFeeStr           string  `json:"totalFeeStr"`
-					SkuName               string  `json:"skuName"`
-					ItemName              string  `json:"itemName"`
-					ItemPriceStr          string  `json:"itemPriceStr"`
-					OrderPackingBoxList   []any   `json:"orderPackingBoxList"`
-					AddSpiceTotalFee      int     `json:"addSpiceTotalFee"`
-					ItemGroupFee          int     `json:"itemGroupFee"`
-					UnitId                string  `json:"unitId"`
-					DishDiscountFlag      string  `json:"dishDiscountFlag"`
-					ActualFee             int     `json:"actualFee"`
-					SkuId                 string  `json:"skuId"`
-					CartItemId            string  `json:"cartItemId"`
-					TempDishFlag          string  `json:"tempDishFlag"`
-					AliasName             string  `json:"aliasName"`
-					OrderNo               string  `json:"orderNo"`
-					UnitName              string  `json:"unitName"`
-					WaitCallState         string  `json:"waitCallState"`
-					ChangePriceFlag       string  `json:"changePriceFlag"`
-					ItemCategoryName      string  `json:"itemCategoryName"`
-					OrderItemId           string  `json:"orderItemId"`
-					OpenTableDishFlag     string  `json:"openTableDishFlag"`
-					BuyTime               string  `json:"buyTime"`
-					ItemOriginGroupFeeStr string  `json:"itemOriginGroupFeeStr"`
-					UrgeDishFlag          string  `json:"urgeDishFlag"`
-					CookAttachTotalFee    int     `json:"cookAttachTotalFee"`
-					AddSpiceTotalFeeStr   string  `json:"addSpiceTotalFeeStr"`
-					ItemId                string  `json:"itemId"`
-					ItemOriginPrice       int     `json:"itemOriginPrice"`
-					TotalFee              int     `json:"totalFee"`
-					RefundFlag            string  `json:"refundFlag"`
-					OrderItemPackageList  []any   `json:"orderItemPackageList"`
-					WeighDishFlag         string  `json:"weighDishFlag"`
-					CookAttachTotalFeeStr string  `json:"cookAttachTotalFeeStr"`
-					SkuCode               string  `json:"skuCode"`
+					ItemOriginGroupFee    float64                `json:"itemOriginGroupFee"`
+					ItemType              string                 `json:"itemType"`
+					ItemNumStr            string                 `json:"itemNumStr"`
+					MustOrderFlag         string                 `json:"mustOrderFlag"`
+					OrderId               string                 `json:"orderId"`
+					OrderAddSpiceList     []any                  `json:"orderAddSpiceList"`
+					ItemCategoryId        string                 `json:"itemCategoryId"`
+					BatchId               string                 `json:"batchId"`
+					BoolChangePrice       string                 `json:"boolChangePrice"`
+					AbolishRefundFlag     string                 `json:"abolishRefundFlag"`
+					GiveFlag              string                 `json:"giveFlag"`
+					TotalFeeStr           string                 `json:"totalFeeStr"`
+					SkuName               string                 `json:"skuName"`
+					ItemName              string                 `json:"itemName"`
+					ItemPriceStr          string                 `json:"itemPriceStr"`
+					OrderPackingBoxList   []any                  `json:"orderPackingBoxList"`
+					AddSpiceTotalFee      int                    `json:"addSpiceTotalFee"`
+					ItemGroupFee          int                    `json:"itemGroupFee"`
+					UnitId                string                 `json:"unitId"`
+					DishDiscountFlag      string                 `json:"dishDiscountFlag"`
+					ActualFee             int                    `json:"actualFee"`
+					SkuId                 string                 `json:"skuId"`
+					CartItemId            string                 `json:"cartItemId"`
+					TempDishFlag          string                 `json:"tempDishFlag"`
+					AliasName             string                 `json:"aliasName"`
+					OrderNo               string                 `json:"orderNo"`
+					UnitName              string                 `json:"unitName"`
+					WaitCallState         string                 `json:"waitCallState"`
+					ChangePriceFlag       string                 `json:"changePriceFlag"`
+					ItemCategoryName      string                 `json:"itemCategoryName"`
+					OrderItemId           string                 `json:"orderItemId"`
+					OpenTableDishFlag     string                 `json:"openTableDishFlag"`
+					BuyTime               string                 `json:"buyTime"`
+					ItemOriginGroupFeeStr string                 `json:"itemOriginGroupFeeStr"`
+					UrgeDishFlag          string                 `json:"urgeDishFlag"`
+					CookAttachTotalFee    int                    `json:"cookAttachTotalFee"`
+					AddSpiceTotalFeeStr   string                 `json:"addSpiceTotalFeeStr"`
+					ItemId                string                 `json:"itemId"`
+					ItemOriginPrice       int                    `json:"itemOriginPrice"`
+					TotalFee              int                    `json:"totalFee"`
+					RefundFlag            string                 `json:"refundFlag"`
+					OrderItemPackageList  []OrderItemPackageList `json:"orderItemPackageList"`
+					WeighDishFlag         string                 `json:"weighDishFlag"`
+					CookAttachTotalFeeStr string                 `json:"cookAttachTotalFeeStr"`
+					SkuCode               string                 `json:"skuCode"`
 				} `json:"orderItemList"`
 				OrderBatch struct {
 					OrderNo        string `json:"orderNo"`
@@ -1684,4 +1684,58 @@ type KposlocalAddResp struct {
 	ExtInfo        map[string]any `json:"extInfo"`
 	Success        bool           `json:"success"`
 	Class          string         `json:"class"`
+}
+
+type OrderItemPackageList struct {
+	AbolishRefundFlag   string `json:"abolishRefundFlag"`
+	ActualFee           int    `json:"actualFee"`
+	AddSpiceTotalFee    int    `json:"addSpiceTotalFee"`
+	AddSpiceTotalFeeStr string `json:"addSpiceTotalFeeStr"`
+	AliasName           string `json:"aliasName"`
+	BatchId             string `json:"batchId"`
+	BoolChangePrice     string `json:"boolChangePrice"`
+	BuyTime             string `json:"buyTime"`
+	CartItemId          string `json:"cartItemId"`
+	CartItemNoteList    []any  `json:"cartItemNoteList"`
+	ChangePriceFlag     string `json:"changePriceFlag"`
+	ChildItemGroupInfo  struct {
+		GroupId   string `json:"groupId"`
+		GroupName string `json:"groupName"`
+	} `json:"childItemGroupInfo"`
+	CookAttachTotalFee    int                    `json:"cookAttachTotalFee"`
+	CookAttachTotalFeeStr string                 `json:"cookAttachTotalFeeStr"`
+	DeviceId              string                 `json:"deviceId"`
+	DishDiscountFlag      string                 `json:"dishDiscountFlag"`
+	GiveFlag              string                 `json:"giveFlag"`
+	ItemCategoryId        string                 `json:"itemCategoryId"`
+	ItemCategoryName      string                 `json:"itemCategoryName"`
+	ItemGroupFee          int                    `json:"itemGroupFee"`
+	ItemId                string                 `json:"itemId"`
+	ItemName              string                 `json:"itemName"`
+	ItemNumStr            string                 `json:"itemNumStr"`
+	ItemOriginGroupFee    int                    `json:"itemOriginGroupFee"`
+	ItemOriginGroupFeeStr string                 `json:"itemOriginGroupFeeStr"`
+	ItemOriginPrice       int                    `json:"itemOriginPrice"`
+	ItemPriceStr          string                 `json:"itemPriceStr"`
+	ItemType              string                 `json:"itemType"`
+	MustOrderFlag         string                 `json:"mustOrderFlag"`
+	OpenTableDishFlag     string                 `json:"openTableDishFlag"`
+	OrderAddSpiceList     []any                  `json:"orderAddSpiceList"`
+	OrderId               string                 `json:"orderId"`
+	OrderItemId           string                 `json:"orderItemId"`
+	OrderItemPackageList  []OrderItemPackageList `json:"orderItemPackageList"`
+	OrderNo               string                 `json:"orderNo"`
+	OrderPackingBoxList   []any                  `json:"orderPackingBoxList"`
+	RefundFlag            string                 `json:"refundFlag"`
+	SkuCode               string                 `json:"skuCode"`
+	SkuId                 string                 `json:"skuId"`
+	SkuName               string                 `json:"skuName"`
+	TempDishFlag          string                 `json:"tempDishFlag"`
+	TotalFee              int                    `json:"totalFee"`
+	TotalFeeStr           string                 `json:"totalFeeStr"`
+	UnitId                string                 `json:"unitId"`
+	UnitName              string                 `json:"unitName"`
+	UrgeDishFlag          string                 `json:"urgeDishFlag"`
+	WaitCallState         string                 `json:"waitCallState"`
+	WeighDishFlag         string                 `json:"weighDishFlag"`
 }
