@@ -140,4 +140,7 @@ type Api interface {
 		统计
 	*/
 	BusinessIncomeList(req BusinessIncomeReq) kry_model.Result[BusinessIncomeResp]
+
+	// 增加公共接口
+	KryCrm(req KryCommon) (any, error)
 }

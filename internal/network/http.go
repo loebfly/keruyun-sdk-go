@@ -23,6 +23,11 @@ func JsonToResult[D any](options JsonOptions) kry_model.Result[D] {
 	return toResult[D](JsonRequest(options))
 }
 
+func JsonToAny(options JsonOptions) (any, error) {
+	res, err := JsonRequest(options)
+	return string(res), err
+}
+
 // JsonRequest Json请求
 func JsonRequest(options JsonOptions) ([]byte, error) {
 	// 构建http请求

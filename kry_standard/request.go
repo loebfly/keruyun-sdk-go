@@ -636,3 +636,9 @@ type KposTableStatusQueryReq struct {
 	PullPosFlag bool   `json:"pullPosFlag"`
 	TableId     string `json:"tableId"`
 }
+
+type KryCommon struct {
+	Uri    string         `json:"uri"`
+	Req    map[string]any `json:"req"`
+	Method string         `json:"method"`
+}
