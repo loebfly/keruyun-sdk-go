@@ -3,7 +3,6 @@ package network
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/loebfly/keruyun-sdk-go/internal/util"
@@ -67,7 +66,6 @@ func (receiver *JsonOptions) BodyString() string {
 func (receiver *JsonOptions) GetSignQueryStr() string {
 	query := receiver.Query
 
-	fmt.Println(query, "2222222")
 	queryStr := ""
 	signStr := ""
 	if _, ok := query[SignPtrAppKey]; ok {
