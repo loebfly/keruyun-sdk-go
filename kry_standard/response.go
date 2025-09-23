@@ -615,14 +615,14 @@ type OrderDetailResp struct {
 				ProductionDeptId      string        `json:"productionDeptId"`
 				UnitName              string        `json:"unitName"`
 				SpecNameConcat        string        `json:"specNameConcat"`
-				ItemPrice             string        `json:"itemPrice"`
-				SalePrice             string        `json:"salePrice"`
+				ItemPrice             float64       `json:"itemPrice"`
+				SalePrice             float64       `json:"salePrice"`
 				PracticeVoList        []interface{} `json:"practiceVoList"`
-				Quantity              string        `json:"quantity"`
-				ItemSaleAmt           string        `json:"itemSaleAmt"`
-				ExtraFeeApportionAmt  string        `json:"extraFeeApportionAmt"`
-				ItemPromoApportionAmt string        `json:"itemPromoApportionAmt"`
-				ItemReceivedAmt       string        `json:"itemReceivedAmt"`
+				Quantity              float64       `json:"quantity"`
+				ItemSaleAmt           float64       `json:"itemSaleAmt"`
+				ExtraFeeApportionAmt  float64       `json:"extraFeeApportionAmt"`
+				ItemPromoApportionAmt float64       `json:"itemPromoApportionAmt"`
+				ItemReceivedAmt       float64       `json:"itemReceivedAmt"`
 			} `json:"children"` // 子节点
 		} `json:"orderItemVoList"` // 菜品明细
 		OpenOrderPromoVoList []struct {
