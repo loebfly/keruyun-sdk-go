@@ -150,7 +150,6 @@ func toResult[D any](resp []byte, err error) kry_model.Result[D] {
 	}
 	var result kry_model.Result[D]
 	err = json.Unmarshal(resp, &result)
-	fmt.Println(err, "---")
 	if err != nil {
 		return kry_model.Result[D]{
 			Code:    -999,
