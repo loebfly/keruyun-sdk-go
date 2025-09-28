@@ -598,31 +598,31 @@ type OrderDetailResp struct {
 			ItemPromoApportionAmt string `json:"itemPromoApportionAmt"` // 商品优惠分摊
 			ItemReceivedAmt       string `json:"itemReceivedAmt"`       // 商品收入
 			Children              []struct {
-				ItemType              string        `json:"itemType"`
-				GiftFlag              bool          `json:"giftFlag"`
-				WeighFlag             bool          `json:"weighFlag"`
-				TempFlag              bool          `json:"tempFlag"`
-				PromoFlag             bool          `json:"promoFlag"`
-				BigTypeName           string        `json:"bigTypeName"`
-				ItemCode              string        `json:"itemCode"`
-				ItemName              string        `json:"itemName"`
-				SaleStatusType        string        `json:"saleStatusType"`
-				SaleStatusTypeCode    string        `json:"saleStatusTypeCode"`
-				Id                    string        `json:"id"`
-				ParentId              string        `json:"parentId"`
-				ItemId                string        `json:"itemId"`
-				ItemSkuId             string        `json:"itemSkuId"`
-				ProductionDeptId      string        `json:"productionDeptId"`
-				UnitName              string        `json:"unitName"`
-				SpecNameConcat        string        `json:"specNameConcat"`
-				ItemPrice             string        `json:"itemPrice"`
-				SalePrice             string        `json:"salePrice"`
-				PracticeVoList        []interface{} `json:"practiceVoList"`
-				Quantity              string        `json:"quantity"`
-				ItemSaleAmt           string        `json:"itemSaleAmt"`
-				ExtraFeeApportionAmt  string        `json:"extraFeeApportionAmt"`
-				ItemPromoApportionAmt string        `json:"itemPromoApportionAmt"`
-				ItemReceivedAmt       string        `json:"itemReceivedAmt"`
+				ItemType              string `json:"itemType"`
+				GiftFlag              bool   `json:"giftFlag"`
+				WeighFlag             bool   `json:"weighFlag"`
+				TempFlag              bool   `json:"tempFlag"`
+				PromoFlag             bool   `json:"promoFlag"`
+				BigTypeName           string `json:"bigTypeName"`
+				ItemCode              string `json:"itemCode"`
+				ItemName              string `json:"itemName"`
+				SaleStatusType        string `json:"saleStatusType"`
+				SaleStatusTypeCode    string `json:"saleStatusTypeCode"`
+				Id                    string `json:"id"`
+				ParentId              string `json:"parentId"`
+				ItemId                string `json:"itemId"`
+				ItemSkuId             string `json:"itemSkuId"`
+				ProductionDeptId      string `json:"productionDeptId"`
+				UnitName              string `json:"unitName"`
+				SpecNameConcat        string `json:"specNameConcat"`
+				ItemPrice             any    `json:"itemPrice"`
+				SalePrice             any    `json:"salePrice"`
+				PracticeVoList        []any  `json:"practiceVoList"`
+				Quantity              any    `json:"quantity"`
+				ItemSaleAmt           any    `json:"itemSaleAmt"`
+				ExtraFeeApportionAmt  any    `json:"extraFeeApportionAmt"`
+				ItemPromoApportionAmt any    `json:"itemPromoApportionAmt"`
+				ItemReceivedAmt       any    `json:"itemReceivedAmt"`
 			} `json:"children"` // 子节点
 		} `json:"orderItemVoList"` // 菜品明细
 		OpenOrderPromoVoList []struct {
